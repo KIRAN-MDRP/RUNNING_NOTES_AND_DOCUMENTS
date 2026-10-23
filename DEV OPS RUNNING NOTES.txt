@@ -1546,9 +1546,9 @@ Steps:
 		i)Now select the created IAM user and goto Security Credentials tab >> click on Create access key 
 		j)Now select the Command Line interface (CLI) radio button >> check the Confirmation check box. >> click on next
 		k)Now set the description tag value (I have provided as secondapp3cli)
-		l)Now we are able to see the Accesskey and Secret Access key values like below.
-		                Access key                     Secret access key
-                    "YOUR ACCESS KEY"                 " YOUR ACCESS SECRET KEY"
+		l)Now we are able to see the accesskey and secret access key values like below.
+		                
+						
 	    m)Click on Done to complete the process.
     4)Now connect to Docker host machine through Git Bash command and execute below command.
         apt-get install awscli
