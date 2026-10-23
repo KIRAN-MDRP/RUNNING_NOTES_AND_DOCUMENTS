@@ -1,0 +1,52 @@
+Tool 1:
+==============
+1)Notebook LM:
+---------------------------
+This tool used to analyse the PDF and generate Podcast.
+
+2)Wispr Flow AI:
+-----------------
+This tool used to generate paragraphs by giving input user's voice.
+
+3)Stitch:
+--------------
+This tool used to develop website in fraction of seconds
+
+4)AIStudio:
+----------------
+This tool used generate the code
+
+5)Gemini:
+---------------
+This tool is used to create mock ups
+
+6)Claude AI:
+------------------
+This tool used to develop both frontend and backend applications
+
+7)Julius:
+----------------
+This toold used to analyse the large amount of data and get the insights.
+
+8)Be10x ATS Resume Generator:
+--------------------------------
+This tool is used to create ATS friendly resume.
+
+9)Voice Mode Feature of ChatGpt:
+-------------------------------------
+We can practise mock interviews.
+
+10)Comet:
+--------------------
+Used to find and apply high paying jobs
+
+11)n8n
+------------------------------------------------
+Personal Assistant (Agentic AI employee)
+
+12)Claude AI:
+-----------------------
+Open claw like feature in dispatch mode.
+This toold used to get access of our remote device like mobile or laptop do the activities.
+
+
