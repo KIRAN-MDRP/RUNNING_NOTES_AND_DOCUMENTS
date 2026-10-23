@@ -1,0 +1,452 @@
+DJANGO RUNNING NOTES:
+==========================================
+DEMO 1:
+===============
+Django Frameworks.
+Will learn below frameworks
+	DJANGO
+	Rest API (DRF)
+	Flask
+	Fast API
+
+And also will learn about UI basics
+	
+Django Framework:
+==========================
+1)It is a web development framework.
+2)Using this we can develop web applications.
+3)It is python based development framework.
+4)It is written in python only. Means to develop complete Django framework python program used.
+5)It is open source high level framework
+6)Official website is: www.djangoproject.com
+7)Django is completely based on MVT (Model View Template) architecture.
+8)MVT is one of the design pattern.
+9)DRY - We do not repeat yourself
+10)M - Model - Data access layer    - MY SQL or SQL Lite
+   V - View  - Business Access Layer - Python 
+   T - Template - Presentation Layer CSS, HTML, JavaScript, Jquery and Bootstrap
+   
+Web Application - The appliction will provide services over the web is called web application.
+In Web Application development below technical terms we needs to know.
+	1)Webpage - Information towards end user or client.
+	            There are two categories here. Static Webpage and Dynamic Webpage
+				Static Webpages are nothing but non interactive webpages. Ex: About us, Contact us etc.
+				Dynamic Webpages are nothing but interactive webpages. Ex: Login, Registration etc.
+	
+	2)Website    -  It is a group of webpages.
+	3)Webbrowser -  It is a software that is used to manage different types of webpages.
+	4)Webserver  -  It is a software which is used to manage different types of websites.
+	
+DEMO 2:
+======================
+History Of Django:
+-------------------------
+1)Django was designed and developed by Lawrence Journal world in the year of 2003.
+2)Django was released in the year of 2003 under the license of BSD.
+3)Original authors of Django are: Adrian Halvothy and Simon Willison.
+4)It is maintained by DSF (Django Software Foundation)
+5)Official website for Django software is: www.djangoproject.com
+6)Django also pronounced as Jango.
+7)Django reinhardt is the popular french guitarist.
+
+Features of Django:
+===========================
+1)Rapid application development.
+2)Secured in web application development. Helps in built applications without SQL injections flaws
+3)Scalable 
+4)Fully loaded - In built lot of modules and libraries
+5)Versatile in nature.
+6)It is completely open source.
+7)Vast community support
+
+Django project setup steps:
+==============================
+Step 1: Install virtual environment (It is an isolation environment)
+-----------------------------------------------------------------------
+	Ex: pip install virtualenv
+
+Step 2:Create a folder called Django@6AM
+--------------------------------------------
+	mkdir project01_11102026folder
+
+Step 3:Move to newly created folder
+-----------------------------------
+	cd project01_11102026folder
+	
+Step 4:Create Virtual Environment
+--------------------------------------
+	python -m venv project01_11102026venv
+	
+Step 5:Activate the virtual environment:
+--------------------------------------------
+	source project01_11102026venv/Scripts/activate
+
+Step 6:Install django framework
+------------------------------------
+	pip install django
+	pip install django=version
+	
+Step 7:Check django version:
+---------------------------------
+	django-admin --version
+	
+Step 8: Create new project with name projectOne
+------------------------------------------------------
+	django-admin startproject practiseOne
+	
+Step 9: Move to the project folder
+---------------------------------------
+    cd practiseOne
+	
+Step 10: Run the server:
+--------------------------------
+	python manage.py runserver
+	
+	*** The default port number on which this project runs is 8000. But if we wants to the server on customized port like for example 8001 then we have to provide below command
+	    pythoon manage.py runserver 8001 
+		
+		Then we are able to see this on browser with the help of below url.
+		http://127.0.0.1:8081
+		*****
+	
+DEMO 3:
+====================
+If we wants to run the server on different port below is the command
+	python manage.py runserver 4000
+	
+manage.py file:
+--------------------
+	
+settings.py file:
+-----------------------
+All project level configurations are done here.
+
+Application Creation Steps:
+==================================
+1)python manage.py startapp appname
+
+To manage all project related db activities make use the tool called db browswer for sqlite
+================================================================================================
+
+
+DEMO 4:
+======================
+Described how to create different views and call them.
+
+
+
+SESSION 5:
+=====================
+To create a super user we have to follow below steps:
+----------------------------------------------------------
+1)From terminal go to project folder and enter below commands
+	python manage.py createsuperuser
+
+DTL - Django Template language which is used to read values from view into template.
+
+SESSION 6:
+====================
+User Interface Basics:
+----------------------------
+HTML - Hipher Text Markup Language
+This is most building block of any web application. It is mandatory technology.
+Will add styling to HTML page with CSS.
+
+Structure of HTML:
+=========================
+<html>
+<head>
+<title>
+</title>
+</head>
+<body>
+</body>
+</html>
+   
+<head> </head> - Which contains meta data.
+Comments in html will be represented like below
+<!--- comments -->
+
+<p> - Paragraph tag
+<b> - Bold font tag
+<i> - Italic font tag
+<strong> - Strong font tag
+<em> - Emphasise font tag
+
+There are two types of lists are there:
+	Ordered and Unordered
+	
+    <ol type="A">
+		<li>C</li>
+		<li>C++</li>
+		<li>JAVA</li>
+		<li>PYTHON</li>
+		<li>DJANGO</li>
+	</ol>
+	
+We have different tags like html,ol,li etc.
+And we have attributes like style,type etc.
+
+Will have nested list also.
+	<ol type="A">
+		<li>C</li>
+		<li>C++</li>
+		<li>JAVA</li>
+		<li>PYTHON</li>
+		<ul>
+			<li>Core</li>
+			<li>Advanced</li>
+		</ul>
+		<li>DJANGO</li>
+	</ol>
+		
+Attributes:
+=====================
+src - This tab is used to represent an image in webpages
+img - It is self closing tab.
+      <img src="" alt="There is no image"> 
+	  
+<table border= "2" align="center">
+	<thead>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Age</th>
+		<th>Contact</th>
+	</thead>
+	<tr>
+		<td>36</td>
+		<td>KiranKumar</td>
+		<td>40</td>
+		<td>9705430428</td>
+	</tr>
+</table>
+
+Hipherlinks:
+================
+<a href="index.html">Click here to go index.html page</a>
+<br> - To go into next line
+<hr> - Horizontal line in between contents
+
+SESSION 7:
+====================
+Today we are going to discuss about forms
+<sub> </sub> - Subscript
+<sup> </sup> - Superscript
+<small> </small> - Small text
+<big> </big> - Big text
+<del> </del> - Delete text
+<ins> </ins> - Insert text
+<mark> </mark> - Mark the text
+<marquee> </marquee> - Slide from right to left We can change the direction as well.
+<marquee direction="right" bgcolor = "green"> </marquee>
+
+HTML Forms:
+===================
+<form name="myform" method="get" action="https://www.flipkart.com">
+	<label for="username">Enter UserName:</label>
+	Enter username:<input type="text" name = "textusername" placeholder = "username" required><br>
+	<label for="password">Enter Password:</password>
+	Enter password:<input type="password" name="textpassword" placeholder = "password" required><br>
+	<input type="submit" value="submit">
+
+</form>
+
+*** If we don't provided method attribute the default method is get only. ****
+*** If we used get method sensitive information will be shown in url which is not secure so that we have to use post method ***
+
+CSS = Cascading Style Sheets:
+===================================
+CSS are used to add style for HTML elements or tags.
+Styling includes colors, borders, direction etc.
+
+syntax:
+==============
+selector{
+	property1:value1;
+	property2:value2
+}
+
+Ex:
+===========
+p{
+	color:red;
+	font-size:30px;
+}
+
+To apply these CSS on HTML tags we will make use of styling technologies.
+We have three types of styling technologies.
+1)Inline Style  - To apply styling for individual html elements. For this we have to use style attribute at that html tag level.
+2)Internal Style - To apply styling for current html page for multiple html elements. For this we have to use <style>
+3)External Style - To apply styling for multiple html pages at a time. For this purpose we have to create separate css file with extention .css
+
+SESSION 8:
+=========================
+Q)When will go for internal style sheet?
+A)When we wants to apply for current html page only then will go for internal style sheet.
+  We needs to make use <style> in <head>.
+  Ex:
+	<html>
+	<head>
+	<style>
+		body{
+			background-color: light-green;
+		}
+	</style>
+	</head>
+	</html>
+
+*** We can make use of rgb(red color, green color, blue color)
+    Ex:
+	===
+		rgb(120,110,111)
+Q)When will go for External style sheet?
+A)<link href="sample.css" rel="stylesheet"> in <head> 
+
+Style sheet priority:
+===============================
+On same html element we have applied all three.
+	Then first priority will go to inline style only.
+	The second priority will be decided based on order we mentioned in head tag.
+	
+CSS selectors:
+---------------------
+Totally we have 4 selectors.
+	1)Element selector.
+	
+	2)id selector  #myid{
+						 color: red;
+							}   
+				<h1 id="myid"> This is h1</h1>
+	
+	3)class selector : .classname{}
+	
+	           <h1 class="cls"> This is h1</h1>
+	
+	4)universal selector: *{
+		color: green;
+	}
+				
+Selector priority:
+=========================
+On same html element if we applied all these selectors then the priority will be:
+	id selector is the first then after class selector and then element selector finally universal selector.
+	
+Comments are:
+	in html : <!---- comments ----->
+	in css : /*   comments    */
+	
+SESSION 9:
+======================
+Grouping Selectors:
+---------------------
+	in css:
+		h1,h2,h3,p{
+			color: red;
+			text-align: center;
+		}
+		
+Sudo element selection:
+==============================
+This selection used to apply style for specific part of the html element.
+Ex:
+-----
+in CSS:
+-------------
+	p::first-letter{color:red;}
+	p::first-line{color:green;}
+	
+a:link -- A normal, unvisited link
+a:visited -- A link the user has visited
+a:hover - A link the user hover on it
+a:active - A link that was clicked by user.
+
+**** Here the order is very important ****
+When we wants to create a dummy link make use of ####
+
+a:link{color: red;}
+a:visited{color:green;}
+a:hover{color:yellow;}
+a:active{color:blue;}
+
+Background image:
+======================
+{
+background-image: url(iflag.png);
+background-repeat: no-repeat;
+background-position: right top;
+background-attachment: fixed;
+}
+
+body{background-image: url(iflag.png); center no-repeat right top;}
+
+background-size: cover
+
+Division tag:
+=========================
+It is used to apply group of elements styling nothin but for a particular division.
+<div>
+</div>
+
+span tag:
+==================
+It is used for inline elements span styling.
+
+JavaScripts Basics:
+=========================
+Java scripts are used to validate elements at client side.
+It is a light weight scripting language that is used for client side validations.
+It is initially known as live script by netscape company.
+Company decided livescript name has changed to Javascript to gain reputation as in those times java was famous.
+There is no relation between Java and Javascript.
+
+Syntax:
+===============
+<script>
+</script> must be placed in head tag only.
+
+There are two types of Javascript files are there.
+	1)Internal Java script - Current web page only
+	2)External Java script - It is available everywhere. So based on requirement will make use it.
+	
+document.write("comment")
+alert("alert")
+window.alert("alert")
+console.log("log")
+
+<script src="sample.js" type="text/javascript"> </script>
+var name = "Kiran"
+document.write("The name is: ", name)
+
+var name = Number(prompt("Enter your name:"))
+document.write("Entered name is: ", name)
+
+// -- Comments in javascript.
+
+SESSION 10:
+=====================
+function validateform(){
+	var uname = document.myform.txtusername.value;
+	var pwd = docuument.myform.txtpassword.value;
+	if( uname == "")
+	{
+		alert("Username cannot be blank")
+		return false;
+	}
+	
+	else if(pwd.length < 6){
+		alert("Password length should not be less than 6")
+		return false;
+	
+	}
+}
+
+in form onsubmit= "return validateform()"
+
+Jquery:
+===============
+It is a fast and concise Javascript library. But it is actually outdated library created by john resig in 2006
+It is browser independent. It is lighht weight and slogan is write less do more.
+
+We can make jquery available in below two ways.
+1)By locally - Download jquery slim build package
+2)By CDN (By content Delivery network)

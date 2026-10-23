@@ -1,0 +1,1208 @@
+DEMO 1 RUNNING NOTES:
+===================================
+Python is the programming language that is used to develop the applications.Web application is nothing but an application which provides services over the web or internet.
+Django is the framework that is used to develop web applications through the Python programming language.Framework is the collection of class libraries with a set of rules and specifications.
+REST - Representational State TransferAPI - Application programming interface.APIs are required to communicate web applications with other applications.DRF - Django Rest Framework.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+DEMO 2 RUNNING NOTES:
+=============================
+Python is the General purpose application development programming language.
+         Python is interpreted programming language
+         Dynamically typed programming language
+         It is case sensitive language         
+		 It provides huge standard libraries support
+Python discovered by Guido Van RassumThe name Python derived from TV show
+Features of Python:=======================
+1)Simple and Easy to learn
+2)Interpreted programming language (Python runs line by line)
+3)Dynamically typed programming language
+4)Structure Oriented Function Oriented and Object oriented programming language
+5)Platform independent
+6)Portability
+7)It provides large standard libraries
+8)Supports multiple paradigms (Structural Functional and Object Oriented)
+9)Extensive Libraries and Frameworks
+10)Automatic memory management (Garbage Collector)11)Strong community support
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+DEMO 3 RUNNING NOTES:
+====================================
+In this session we learned about how to install python python editor.
+And how to run the python programs etc.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+DEMO 4 RUNNING NOTES:
+============================
+1) Comments :       
+	Single line comment - #     
+	Multi line comment - (Ctrl + / for commenting and same for uncommenting by selecting text)
+2) Keywords or Reserved Words      
+	import keyword      
+	print(keyword.kwlist)3) 
+	Identifiers:      
+	Rules:
+		1) lower case or upper case                
+		2) Case sensitive                
+		3) Allows digits (0-9)               
+		4) Should not start with digits (empid10 is correct but 10empid is not correct)                
+		5) Allows the special symbol (_)                
+		6)Should not two or more parts
+        7)If an identifier starts with _ then that will be private identifier in Python                
+        8) No keyword or reserved word used as Identifier
+	4) Variables:         It is also called as identifier.
+         It is named memory location of identifier.
+         id() is a built-in function which is used to get memory location of variable that returns unique address
+    5)Multiple Assignments         
+	It is the process of assigning single value or multiple values to multiple variables
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+DEMO 5 RUNNING NOTES - 12TH MAY 2026
+===========================================Indentation:---------------------
+Datatypes in Python:-------------------------------------
+	Basic:----------
+		1)None data type
+		2)Numeric type - int float and complex
+		3)Boolean type- boolData Structures:--------------------------
+	1)Sequence type (Data Structures) - 
+		String List Range
+	2)Set type - Set Frozen Set
+	3)Mapping type - dict
+	4)Byte type - bytes bytearray         
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+SESSION 6:
+=================
+string - It is group of characters or sequence of characters            Can be created with '' or " " or """    """str is a immutable in python
+list data structure - 
+	List is the ordered collection of elements  
+    It allows duplicate elements
+    It allows hetrogenius collection (Different data types)              
+    It is mutable datastructure
+   Array - It is the Homogenius collection of data
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+SESSION 7:
+==================
+tuple
+--------------
+	It is ordered collection of elements
+	We can create tuple using ()
+	() it is optional while creating tuples
+	It allows duplicate and different data type elements
+	tuple is immutable. (* This is the main difference between list and tuple)
+	While creating a tuple with single element that should be end with  Ex: tupleOne = (1)
+	
+Main differences of list and tuple are:
+============================================
+		Tuple occupies less memory where list occupies huge memory
+		list is mutable and where as tuple is immutable
+		
+range:
+=============
+	range is used to generate range of values or sequence of values.
+	We can create range with range()
+	By default range function starts with 0
+	Range is immutable. Means once its created we can't modify it
+	
+set type:
+=================
+	It is un ordered collection of unique elements (No duplicate elements are allowed)
+	We can create set by using {}
+	We can create empty set using set{}
+	It allows different data type elements (Heterogenious)
+	Set is mutable.
+	
+Frozen Set:
+================
+	It is immutable.
+	We can create frozen set by using frozenSet()
+	
+Comparision Between List Tuple Set and FrozenSet
+======================================================================
+	Feature       ||                 List 			||          Tuple                    ||             Set               ||         FrozenSet               ||         Array
+ ================ || ============================== ||	================================ || ============================= || =============================== || =====================
+1)Ordered or Un   || 1)It is an orderded            ||  1)It is an ordered datasturcture ||  1) It is un ordered          ||  1) It is also an Ordered       ||
+  Ordered data    ||      Structure?                ||     datastructure                 ||     datastructure  		      ||     collection.                 ||
+2)Allows duplicate|| 2) Yes                         ||  2)Yes  				             ||  2) No                        ||  2) No                          ||
+	elements?     ||                                ||                                   ||                               ||                                 ||
+3)Allows          || 3) Yes                         ||  3)Yes                            ||  3) Yes                       ||  3) Yes                         ||
+  Heterogenious   ||                                ||                                   ||                               ||                                 ||
+  elements        ||                                ||                                   ||                               ||                                 ||
+  insertion?      ||                                ||                                   ||                               ||                                 || 
+4)Is it Mutable or|| 4) Mutable                     ||  4)Immutable                      ||  4) Mutable                   ||  4) Immutable                   ||
+   Immutable?     ||                                ||                                   ||                               ||                                 ||
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+SESSION 8:
+========================================
+dict:
+--------------------
+1) dict is a collection of items. Items are nothing but pair of key and value.
+2) Each item can be a pair. (Key and Value)
+3) Allowed key types are: Any immutable data structure such as (Tuple Frozen Set String etc)
+4) Key and value pair will be separated using : symboll
+5) It can be created using  {}
+6) In dict Keys are immutable and keys must be unique.
+7) In dict Values are mutable and values needs not be unique.
+8) In dict key and value are of any data type (Provided that key condition must be satisfied.)
+=======================================================================================================================
+     Data Structure  ||    Creation Method     ||    Mutable    ||   Immutable     ||    Ordered      ||    Unordered||
+=======================================================================================================================
+    1) String        ||    stringOne = ''      ||     No        ||      Yes        ||     Yes         ||      No     ||
+	                 ||    stringTwo = " "     ||               ||                 ||                 ||             ||
+-----------------------------------------------------------------------------------------------------------------------
+	2) List          ||    listOne = []        ||    Yes        ||      No         ||     Yes         ||      No     ||               
+                           listTwo = [123]     ||               ||                 ||                 ||             ||
+-----------------------------------------------------------------------------------------------------------------------
+    3) Tuple         ||    tupleOne = ()       ||               ||                 ||                 ||             ||
+                     ||    tupleTwo = (2)      ||               ||                 ||                 ||             ||
+                     ||    tupleThree = (123)  ||     No        ||      Yes         ||     Yes        ||      No     ||
+-----------------------------------------------------------------------------------------------------------------------
+    4) Set           ||    setOne = set()      ||     Yes       ||      No         ||     No          ||      No     ||
+                     ||    setTwo = {1}        ||               ||                 ||                 ||             || 
+                     ||    setThree = {12}    ||				||                 ||                 ||             ||
+-----------------------------------------------------------------------------------------------------------------------
+    5)FrozenSet      ||    frozenSetOne =      ||     No        ||      Yes        ||     No          ||     Yes     ||
+                     ||     frozenset()	       ||               ||                 ||                 ||             ||
+					 ||	   frozenSetTwo =      ||               ||                 ||                 ||             ||
+				     ||	   frozenset({12})     ||               ||                 ||                 ||             ||
+-----------------------------------------------------------------------------------------------------------------------
+    6)Range          ||  rangeOne = range(3)   ||     No        ||      Yes        ||     Yes         ||      No	 ||				 
+	                 ||  rangeTwo = range(15)  ||               ||                 ||                 ||             ||
+                     ||  rangeThree =          ||               ||                 ||                 ||             ||
+                     ||   range(162)		   ||			    ||                 ||                 ||             ||
+-----------------------------------------------------------------------------------------------------------------------
+    7)dict           || dictOne = {}           ||  Key:No       ||  Key: Yes       ||     Yes         ||     No      ||
+	                 || dictTwo = {1:"Kiran"   ||  Value: Yes   ||  Value:No       ||                 ||             ||
+					 ||   2:"Kumar"}           ||               ||                 ||                 ||             ||
+=======================================================================================================================
+
+
+====================================================================================================================================================================================
+   String            ||        List        ||      Tuple      ||             Set              ||       FrozenSet        ||       Dictionary    ||     
+====================================================================================================================================================================================
+  Total 47 methods   || Total 11 methods   || Total 2 methods ||       Total 17 methods       ||     Total 8 methods    ||   Total 11 methods  ||
+  ------------------ ||--------------------|| ----------------|| -----------------------------|| -----------------------|| --------------------||
+   capitalize()      ||  append(ele)       || count() index() || add() update()  			  ||  union()intersection() ||  keys() values()    ||
+   casefold()        ||  extend(list)      ||=================|| discard()       			  ||  difference()          ||  items() pop()      ||
+   replace()         ||  insert(pos,ele)   ||                 || remove() pop()  			  ||  symmetric_difference()||  popitem()fromkeys()||
+   swapcase()        ||  index(ele)        ||                 || union()         			  ||  issubset()            ||  setdefault()       ||
+   encode()          ||  remove(ele) pop() ||                 || disjoint()      			  ||  issuperset()          ||  clear() update()   ||
+   expandtabs()      ||  reverse()         ||                 || clear() copy()        		  ||  isdisjoint() copy()   ||  get() copy()       ||
+   lower() upper()   ||  sort()            ||                 || issubset()      			  ||=================================================
+   title()maketrans()||  sort(reversed)    ||                 || issuperset()    			  ||
+   translate()       ||  count() clear()   ||                 || intersection()  			  ||
+   format()          ||  copy()            ||                 || difference()    			  ||
+   format_map()      ||======================                 || symmetric_difference()  	  ||
+   zfill() join()    ||                                       || intersection_update()        ||
+   splitlines()      ||                                       || difference_update()          ||
+   count() center()  ||                                       || symmetric_difference_update()||  
+   find() rfind()    ||                                       ==================================
+   index() rindex()  ||                                       
+   just() rjust()    ||                                       
+   split() rsplit()  ||
+   strip() lstrip()  ||
+   rstrip()          ||
+   partition()       ||
+   rpartition()      ||
+   startswith()      ||
+   endswith()        ||
+   removeprefix()    ||
+   removesuffix()    ||
+   isalnum()isalpha()||
+   isnumeric()       ||
+   isdigit()         ||
+   isdecimal()       ||
+   isspace()         ||
+   isprintable()     ||
+   isascii()         ||
+   islower()isupper()||
+   isidentifier()    ||
+   istitle()         ||
+=======================   
+   
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+SESSION 9:
+======================
+Operators:
+----------------
+It is a symbol that is intended to perform specific tasks
+
+1)Arithmetic Operators
+2)Relational Operators
+3)Assignment Operators
+4)Logical Operators
+5)Membership Operators
+6)Identity Operators
+7)Bitwise Operators
+
+1) Arithmetic Operators:
+=============================
+	1.1 + --- Addition
+	1.2 - --- Substraction
+	1.3 * --- Multiplication
+	1.4 / --- Division
+	1.5 % --- Modulas
+    1.6 ** --- Power
+    1.7 // --- Floor
+   
+2) Relational Operators:
+=========================
+	< --- less than
+	> --- Greater than
+   <= --- Less than or equal 
+   >= --- Greater than or equal
+   == --- Equals to
+   != --- Not equals to
+   
+3) Assignment Operators:
+===========================
+   = --- Assign
+  += --- Addition and Assign
+  -= --- Substraction and Assign
+  *= --- Multiplication and Assign
+  /= --- Division and Assign
+  %= --- Modular Division and Assign
+ //= --- Floor division and Assign
+ **= --- Power and Assign
+ 
+4) Logical Operators:
+===========================
+  and : If both conditions are true then returns true in remaining all cases returns false
+  or : If both the condisions are false then returns false in remaining all cases returns true
+  not: returns true if the condition is false and vice versa.
+  
+5) Membership Operators:
+=============================
+ Membership operators used to check that the value or element is present into the given sequence or nothing
+ in : return true if the value is present into the given sequence.
+ not in: return true if the value is not present into the given sequence.
+ 
+6) Identity Operators:
+=========================
+ Identity operators are used to check whether variables or objects having same identity or not.
+ is: Returns true if the values or variables having same identity else returns false.
+ is not: Returns true if the values or variables are not having same identity else return false.
+ *** id() is the built-in function that used to get the memory address of mentioned variables.
+     This function returns a unique integer always *****
+	 
+7) Bitwise Operators:
+===========================
+  bitwise And  &
+  bitwise Or |
+  bitwise XOR ^
+  bitwise NOT(~)
+  bitwise leftshift <<
+  bitwise rightshift >>
+  
+  bin(number) returns binary form of given number.
+  
+SESSION 10:
+============================
+Control Flow Statements:
+=============================
+There are three types of controll flow statements are there.
+1)Conditional statements:
+	if
+	if else
+	nested if else
+	elif
+	
+2)Iterative Statements:
+  Iterative means when we have group of elements we needs to iterative over that and will evaluate
+	for loop
+	while loop
+3)Transfer Statements:
+	break    - It is used to stop the iterations based on the condition.
+	continue - It is used to skip the current iteration and continue with next iteration.
+	pass     - It is keyword to make empty block. 
+	*** Some times we don't wants to write any logic simply pass it to next line of code execution will make use the pass ******
+	
+SESSION 11:
+=====================
+1)Nested for loop:
+	A for loop which are having one or more nested for loop is called Nested for loops.
+	
+while loop:
+===============
+	Used to execute the number of statements as long as condition evaluates true.
+	Once the condition evaluates to false then controll flow come out from the loop.
+	
+string datastructure:
+===========================
+	It is a group of characters.
+	It can be created like str or '' or "" or ''' ''' or """ """
+    string maniputlations:
+    --------------------------
+		dir(string object) returns all dunder(double underscore) functions and normal functions.
+		1)string indexing and slicing - s[0] s[2]
+		        s[:] 
+				s[::-2]
+    
+  
+*** For known iterations of fixed number of iterations will make use for loop. Where as we don't know about how many no of iterations we do have 
+then go for the while loop*******
+
+SESSION 12:
+==================
+string[::-1] = Reverse string 
+4)String concatination and Multiplication:
+===========================================
+	s1 = "Kiran"
+	s2 = "Kumar
+	s1 + s2  "KiranKumar"
+	
+5)String split max split:
+=============================
+	split(splitcharacter maxlimit(optional))
+	split(" ")
+	split(" "3)
+	
+6)Difference between Title and Capital()
+================================================
+In Title First character of firstt word of paragraph will be Capital letter
+In case of Capital each and every word first character will be capital letter.
+
+
+SESSION 13:
+=========================
+sort() - String don't have sort method directly but still we can do it.
+strip() lstrip() rstrip()
+len()
+find() - Returns least index value rfind() - Returns highest index of substring if no substring found returns -1 
+index() rindex() - Returns least index and highest index values of substring if no substring found returns Value error.
+Min() Max() - Returns minimum and maximum characters from the given string.
+ord(string) - Returns ascii number of given string.
+
+Exercise Program:
+=======================
+1)Write a program print unique characters from the given string.
+2)Write a program to print each word in reverse order from given string.
+3)Write a program to print vowels from the given string.
+
+SESSION 14:
+========================
+partition() rpartition():
+------------------------------
+in partition() only first occurance of the matching string will get divided. And return type is tuple.
+Where as for split() it divides each and every occurance of the matching string will get divided and return type is list.
+
+startswith() endswith():
+isdigit()
+isalpha()
+isalnum()
+All the above functions checks all characters present into the string.
+
+list:
+----------
+Rules:
+-----------
+1)list is the ordered collection of elements.
+2)We can creae list using []
+3)It allows to insert duplicate elements.
+4)It allows different data type elements. Hetero genious elements.
+5)It is mutable.
+
+List Methods:
+-----------------------
+append() - At a time we can add only one element.
+extend() - At a time we can n number of elements.
+insert(position element)
+
+remove() - Based on value we can remove an element. If desired element is not present then it will through error.
+pop() - Based on index. If that index won't present then will get index error.
+clear() - To clear the existing list. 
+These all are methods where as
+del is the keyword.
+
+sort() - To sort the elements from given list.
+
+SESSION 15:
+=================List features continuation:------------------------------------------
+copy - Two types of copy methods are there.   
+       Those are deep copy and shallow copy
+  Shallow copy - If original object changed associated object also get impacted and vice versa. Why because it is due to memory address of both objects are same  
+  Deep copy - No impact will be happenscount - Returns number of times given object present into the listindex - Returns position of the given object into the given list.
+Tuple:
+=========
+  It is ordered collection of elements like listWe create tuples with round brackets provided that round brackets are optionalTo create a tuple with single element will have to give  after that single element.
+  It allows duplicate elements.It allows to store heterogeneous elements It is immutable(We cannot change or modify it)
+  Rules:
+  --------------
+  1)It is ordered collection of elements.
+  2)We can create a tuple like below. t1 = ()
+  3)Tuple with single element we needs to keep  symboll. t1 = (2)
+  4)It allows duplicate elements.
+  5)It allows Hetorogenious elements to be present in the data structure.
+  6)It is immutable. (We can't change it after created)
+  
+Datastructure packing and unpacking:
+------------------------------------------
+	Ex:
+	---
+	 tuple packing:
+	 ----------------
+	    a = 1
+		b = 2
+		c = 3
+		t1 = abc or t1 = (abc)
+		
+	 tuple unpacking:
+	 ------------------
+		abc = t1
+		
+SESSION 16:
+======================
+SET:
+--------------
+    Only datastructure that is unordered is Set.
+	Rules:
+	----------
+	1)It is unordered collection of unique elements.
+	2)We can create set by using {with elements}
+	3)To create empty set with set()
+	4)It allows to insert heterogeneous elements in it.
+	5)It is mutable.
+	
+    Operations:
+	----------------------
+	1)add() - Can add only one element to the set
+	2)update() - Can add multiple elements to the set
+	3)discard() - Can remove elements from the set
+	4)remove() - It also removes element from the set but if the desired element not present remove method will through error.
+	5)pop() - Left most element will get removed from the set
+	6)clear() - Only elements are removed from the set
+	7)union() "|"
+	8)intersection() "&"
+	9)differencee() "-"
+	10symmetric_difference() "^"
+	
+FROZEN SET:
+-----------------------
+	It is immutable data structure.
+	
+DICTIONARY:(dict)
+-------------------
+	1)It is a collection of items where as item is a pair of key and value.
+	2)We can create a dictionary by using {} Ex: dict1 = {}
+	3)In dictionary keys are immutable where as values are mutable.
+	4)In dictionary keys must be unique where as values no need to unique.
+	5)In dictionary key and values are any data type provided that key rule to be satisfied.
+	
+	Operations:
+	----------------------
+	get() - To get the value of key mentioned
+	del key word
+	copy() - Shallow copy and Deep copy()
+	items()
+	keys()
+	values()
+	len()
+	pop()
+	popitem()
+	membership test only applicable on only keys.
+SESSION 17:
+=============================
+    pop() and popitem()
+		pop() deletes item from dictionary based on key. Ex: pop(key)
+		popitem() deletes last item from dictionary.     Ex: popitem()
+		
+	bytes - It is immutable. Allowed values range 0 to 256. It allows Homogenius elements.
+	bytearray  - It is mutable data structure. Allowed range is 0 to 256.
+	
+	Funtional Oriented Program:
+	=================================
+		It is reusable part of the code which can be called again and again whereever it is required.
+		Functions are of two types:
+		---------------------------------
+		1)Pre defined or System defined functions.
+		  Ex: print() input() type() id() ord() all data structure funtions.
+		2)User defined funtions
+		  Syntax:
+		  -----------
+		  def functionName(parameters):
+			'''doc string '''
+			statements
+			return statement
+SESSION 18:
+===================
+In Python a single function can be return multiple values. But having a funtion to perform single activity is the best practise.
+
+Types of variables in functions:
+------------------------------------
+	1.Local Variables - Variables present inside a funtion and accessable only in that function called local vaiables.
+	                    Local variables cannot access outside of the function.
+	2.Global Variables - Variables those are declared outside the function and able to access everywhere is called Global Variable.
+
+global keyword:
+---------------------
+	This keyword used to represent a variable as global variable.  And also it will be used to declare a global variable inside a function for requirement modification.
+	globals()
+	
+***** ord(character) = Returns ascii value of given character
+      chr(number) = Returns character value of given number **************
+	
+Different types of arguments:
+--------------------------------------
+There are four types of arguments
+	1)Positional arguments - These are the arguments which are passed to a funtion in correct positional order called positional arguments. If we changed the position of 
+	  arguments will get different change. If we increased of decreased number of arguments then will get the error.
+	  
+	2)Keyword arguments - Arguments which are passed to function using keyword name or parameter name is called Keyword arguments.
+      While working with keyword arguments order or postion of arguments are not important. But keyword name is important.
+      We can work with one positional argument and one keyword argument. But make sure that in order first we have to pass postional argument there after we can pass
+      Keyword argument.	  
+	3)Default arguments - If we not passing any argument value at runtime then the default value will get printed in the funtion execution.
+	                      We can work with combination of default and non default argument but order should be Non default argument followed by default argument.
+
+	4)Variable Length Arguments - Caller can call any number of arguments. There is no fixed length of the arguments.
+	                              def fun(*n) But the default storage is tuple.
+	  
+SESSION 19:
+======================
+Difference between *args and **kwargs:
+-------------------------------------------
+	*args - Allows to pass zero values to any number of values And default storage is tuple.
+	**kwargs - Variable length keyword arguments.
+	           Allows us to pass number of key and value pairs to functions.
+			   default storage is dictionary.
+			   
+Two more arguments are also there:
+--------------------------------------
+	1)Positional only arguments - We needs to pass only positional arguments. def f(ab/)
+	2)Keyword only arguments  - We needs to pass only Keyword arguments.      def f(*ab)
+
+function aliasing:
+----------------------
+Just giving any other name for function name called Alias name.
+
+Nested Funtion:
+-------------------
+A function which is defined inside another function called nested function.
+
+Recurssive Funtion:
+-----------------------------
+	It is function calls itself is called recurssive function.
+	
+import math
+print(math.factorial(3)
+print(math.pow(23))
+
+Anonymous or Lambda Function:
+-------------------------------------
+Some times we needs to define a function with out a name called Anonymous or Lambda function.
+Anonymous means no name.
+
+Advantages:
+-----------------
+1)Using lambda we can write concise code
+2)Using lambda we can reduce length of the code
+3)Using lambda we can improve redability of the program.
+4)Using lambda mostly we can write single line expression.
+5)Lambdas are for instant usage.
+
+Syntax:
+------------------
+lambda arguments:expression
+
+SESSION 20:
+======================
+In Python some functions always expects other functions as arguments. In this case lambdas are best use.
+	1)filter() - Used to filter the values from given sequence based on the condition.
+			   - Syntax: filter(function, sequence)
+			             function - it is the conditional check.
+						 sequence - That can be either list set or tuple etc.
+						 
+	2)map() - Where a condition will be applied on each and every element and then return new sequence of elements. For this purpose will make use of map()
+	          Syntax:
+			  ---------
+				map(function, sequence)
+				
+	3)reduce() - This function is used to reduce the values from the given sequence and return a single value.
+	             Syntax: 
+				 --------
+				map(function, sequence)
+				
+Modules in Python:
+------------------------
+	In python every .py file acts as Module.
+	In general module consists of group of classes methods and variables.
+	Modules are to the purpose of reusability of entire program.
+	There are two types of modules are available.
+	Those are:
+		1)User defined modules
+		2)Predefined modules.
+			ossysfunctools etc.
+			
+	Heirarchy is:
+	--------------
+		Packages -- Modules -- Classes ---- Functions --- Variables.
+	
+	Module Aliasing:
+	------------------
+		Module aliasing means giving other name to modules
+		
+	Member Aliasing:
+	------------------
+		Member aliasing menas giving other name to members.
+		
+	To know the members and functions of module we can do it in below way.
+	import modulename
+	help(modulename)
+	
+SESSION 21:
+====================
+__name__ : It is the special variable that is used to check whether the program is executing independently or from some other program.
+If the program is executing independently then the value of __name__  value is __main__
+If the program is executing from some other program then the value of __name__ is that program name.
+
+Built-in Modules:
+====================
+		1)datetime
+		2)calendar
+		3)random
+		4)array
+		5)numpy
+		
+		1)datetime module - This module used to work with date related object
+		  now()
+		  date()
+		  time()
+		  strftime() - is used to display date object into string readable format.
+		  x.strftime("%A") - Day
+		  x.strftime("%a")
+	      B b - Month 
+		  Y y - Year
+		  "%Y-%B-%D %H-%M%-%S %p"
+		  
+		  *** strftime() - This method used to convert datetime object into String
+		      strptime() - This method used to convert string into datetime object ***
+		  
+		  
+	    2)Calendar module - This module is used to particular month and year
+			month(yearmonth)
+			calendar(year w l c)
+			year - year
+			w - width of the character
+			l - lines per week
+			c - column separation
+		    leapdays(year1 year2)
+			isleap(year)
+			
+		3)random module - Used to generate random numbers on the flow for authentication.
+			random() - Generates random float values in between 0 to 1(both are not included) ex: 0.11 and 1.22
+			randint() - Generates random int values by default between given numbers (include)
+			uniform() - Generates random float values in between two given numbers (not included)
+			randrange(start stop step) - 
+			choice() - It won't return a random collection. It will return random object. 
+			   list1 = [142]
+			   choice(list1)
+			shuffle()
+			
+SESSION 22:
+========================
+Today will discuss about array and numpy data structures.
+Array - It is collection of similar data type elements.
+
+We can create array and list using []. But using list we can insert Heterogeneous collection (Different type of elements)
+and array is Homogenius collection (Same type of elements)
+
+The methods of list all are applicable for array also.
+
+In Python we have two types of arrays are there.
+	1)Single dimension array - An array which contains only one row or one column is called Single dimention array. Ex:    [ 1  2  3]
+	2)Two dimension array - An array which contain more than one row and more than one column is called two dimension array. [1  2  3
+	                                                                                                                          4  5  6]
+There are two modules are there array module and numpy module.
+
+Numpy - Numeric python.
+QWhy two modules for Arrays?
+A)Using array module we are able to create only single dimension array. 
+But using numpy module we can create single and multi dimension array.
+
+
+Numpy module provided below methods to create multi or single dimension arrays.
+
+array()
+linspace()
+logspace()
+arange()
+zeros()
+ones()
+
+properties of array():
+----------------------
+		ndim - Number of dimensions
+        dtype - Type of data.		
+		shape - Ex: 2,3 2 rows and 3 columns
+		size - Number of elements present into the array.
+		
+linspace(start, stop, no of parts)
+----------------------------------------
+	By default linspace() will create float data type array only.
+	
+logspace(start, stop, no of parts)
+---------------------------------------
+	[1+e]
+arange(start, stop, step)
+------------------------------------
+	arange(2,20,4)
+zeros()
+---------------
+	zeros(10,dtype=int)
+ones()
+----------------
+    ones(10,dtype = int)
+	
+flatten()
+==============
+Used to convert multi dimension into single dimension array.
+Assignments:
+=======================
+1)Write a program to create Numpy single dimension array by accepting length and values runtime.
+2)Write a program to create Numpy two dimension array by accepting row size, column size and values runtime.
+		
+SESSION 23:
+===============
+1) Object Oriented Programming:
+======================================
+Benefits of Object Oriented Programming
+================================================
+	1) Security
+	2) Reusability (Classes and Objects Reusability)
+	3) Application Enhancement
+	
+1)Class - It is collection of variables and methods
+2)Object - It is an instance of class or It is used to represent a class.
+
+Along with the above two OOPs features if any programming language needs to become as Object Oriented Programming Language
+It should satisfy the below all features.
+3) Encapsulation - It is the process of providing restrictions to access variables and methods
+                   It is used to prevent the data from modification.
+                   We can achieve encapsulation by making variables and methods as private.	
+                   **** In python we can make any variables as private by adding __ before variable. 
+				   Ex: a = 10 # It is public variable.
+				      __a = 10 # It is private variable we cant modify it.
+
+4) Abstraction  - It is the process of hiding the imnplementation but providing the service.
+
+5) Polymorphism - Poly means many and Morph means behaviours
+                  There are two types of polymorphisms are there
+				  
+				  1)Static or Compile time Polymorphism - Overloading - Code refinement technique
+				  2)Dynamic or Runtime Polymorphism - Overriding - Code replacement technique
+				  
+6) Inheritance - It is the process of creating a new class from existing class.
+                 In this process Parent/Existing/Super class Child/New/Derived class.
+				 Main advantage is : Code reusability and extensibility
+				 Different types of inheritances are there:
+					A) Single Inheritance - Creating Single Child Class from Single Parent Class.
+					B) Multi-Level Inheritance - Creating Multi-level Single Parent and Single Child Classes.
+					C) Heirarchial Inheritance - Creating multiple Child Class from Single Parent Class
+					D) Multiple Inheritance - Creating Single Child Class from Multiple Parent Clasess
+					E) Hybrid Inheritance - It is combination of Heirarchial and Multiple Inheritances
+					
+	Single Inheritance      Multi- Level          Hierarchial                Multiple                     Hybrid   
+    ------------------    -----------------    ------------------        -----------------        ---------------------------                 
+      Parent Class 	         Parent 1              Parent              Parent 1    Parent 2               Parent 
+			|                   |               ------|------             |____________|             ________|_________
+	   Child Class			  Child  	        |            |                   |                   |                 |  
+					            |            Child 1      Child 2             Child              Child 1            Child 2
+							 Grand Child 	                                                         |_________________|                 
+					                                                                                          | 
+                                                                                                         Grand Child 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+SESSION 24:
+=======================
+Class creation and Object creation
+
+class syntax:
+==================
+	class keyword className:
+	Ex: class Student:
+	    class StudentDetails:
+		
+Syntax to create object to class:
+=====================================
+	objectName = className()
+	Ex:  studentobject1 = Student()
+	     sdetails = StudentDetails()
+
+In python under any class of methods first parameter is by default self.
+self is the special variable that is used to access all members of the class.
+
+Constructors:
+====================
+1)It is a special method of class
+2)It is used to declare the variables and initialize the values to the variables.
+3)In Python constructor name always as __init__(self):
+4)self is the first parameter of the constructor and it is used to access current class members
+5)When we create object to the class automatically constructor starts its execution.
+6)We can create any number of objects to the class. Per every object constructor executes once.
+
+Method:
+=================
+1)It is reusable piece of code which can be called again and again whereever and when it is required.
+2)Method is used to write any business logic code.
+3)Method name can be anything.
+4)Self is the first parameter of the method.
+5)Method starts its execution only when it is called.
+6)For every object a method can be called any number of times based on requirements
+
+*****Note: Iniside the class including a constructor is optional. Similarly a method also optional.
+But including any one is compulsory *******
+
+**** If we dont have any method to display object details then we can make use object.__dict__ technique.
+Ex:
+    student.__dict__
+==========
+help(Class Object)
+print(student.__dict__)	
+print(student.__doc__)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+SESSION 25:
+=====================
+There are totally three types of variables and three types of methods are available in python.
+
+Three types of Variables:
+============================
+		1)Instance variables (Object level)
+			If the value of variable varies from object to object then such type of variables are called Instance variable.
+			Where we can declare instance variables:
+			-------------------------------------------
+				inside constructor using self
+				inside a method using self
+				inside of the class using object name.
+				
+			How to access we can access instance variables
+            ------------------------------------------------------
+				We can access instance variable inside the class using self
+				We can access instance variables outside the class using class object.
+				
+			****** Note: We can create any number of objects for the class. For every single object there will be a separate copy of instance variables created.
+                         If we change or delete value of any object's instance variable no copy of other object won't get affected. *****
+            
+			How to delete instance variables:
+			===================================
+				Inside class using del self.variable
+				Outside class using del object.variable
+				
+		2)Static variables (Class level)
+			If the value of variable not varied from object to object is called Static Variable or Class level variables.
+			Entire class there will be only one copy of static variable.
+			
+			The variable which was declared inside the class body but outside of method or constructor is called static variable.
+			
+			We can access static variable by using class name or object name. Recommended by class name only.
+		
+		3)Local variables (Method level)
+			The variables which are declared inside a particular method and those variables are allowed to access within the same method are called Local Variables.
+			Local variable are not allowed to access outside of the method.
+			Local variables are also called as temporary variables why because as soon as the method execution starts declaration of local variable and when ever method
+			execution finished then those local variables will get destroyed.
+		
+		
+Three types of Methods:
+===============================
+		1)Instance methods 
+		2)Class methods
+		3)Static methods
+		
+SESSION 26:
+========================
+Types of Methods:
+-------------------------
+There are three types of methods are allowed in python.
+	1)Instance methods
+	2)Class methods
+	3)Static methods
+		
+	1)Instance method:
+	-------------------------
+		Inside a method if we used instance variables, then those methods are called as instance methods.
+		While defining instance methods we should pass first argument as self
+		self is the first parameter of instance method
+		We can access instance method inside class using self keyword
+		We can access instance method outside class using class object
+	 Note: By default in python object oriented programming class all the methoda are instance methods only.
+	 
+	 Ex:
+	 ---
+	 def methodOne(self):
+		code.....
+	 
+    2)Class Methods:
+	-----------------------
+		Inside the method implementation when we use only static or class level variables then such type of methods are called class methods.
+		While defining class method we should pass class variable i.e cls
+		Using cls we can acess static or class variables
+		cls is the first parameter of class method.
+		With the help of @classmethod we can create class method
+	Ex:
+    -----
+	@classmethod
+	def methodOne(cls):
+		code...
+
+					
+    3)Static Methods:
+	-------------------
+		1)These are general utility methods. Using this we can write any code.
+		2)While defining static methods should not pass any self or cls arguments.
+		3)To create a static method @staticmethod decorator.
+		4)We can access static methods using class name or object name.
+		
+Q)Where we can access static variables and how to delete static variables?
+A)We can access static variables inside 
+			- constructor using self or className
+			- instance method using class name or self
+            - class method using class name or cls
+			- static method using classname 
+            - outside the class using classname or object name
+
+We can delete static variable anywhere using below syntax.
+	     del classname.staticvariable
+		 
+		 
+SESSION 27:
+======================
+Today we are going to discuss about inner class and garbage collector (gc)
+
+Inner class:
+================
+A class inside in other class called inner class.
+We require inner classes when we have situation like without existing one type of object there is no chance of another type of object.
+Ex:
+---
+	Without Head class we dont have brain class.
+	
+Garbage Collector(GC):
+===========================
+GC best feature is AML (Automatic Memory Management)
+Means automatically memory managed.
+In python we have two types of objects.
+----------------------------------------------
+	1)Objects in use - Objects those are required for program execution
+	2)Idled Object (Garbage) - Objects are not required for program execution.
+	
+To check GC enabled or not:
+-------------------------------
+	1)isenabled() - Return type true or false and it is useful to check GC enabled or not
+	2)disable() - True / False are return type
+	3)enable() - True/False are return type
+	
+To make use of gc we must import gc module into our program.
+
+Destructor:
+============================
+1)It is a special method of class.
+2)Destructor name is __del__(self):
+3)Internally always Garbage collector calls destructor for clean up activities(Memory de allocation process)
+
+Encapsulation:
+===================
+It is process of providing restrictions to access the variables and methods of the class.
+We need encapsulation to prevent data from modification.
+We can achieve encapsulation by making the variables and methods as private.
+By default all variables in python are public.
+	x = 10 - public variable : Any one can access
+	_y = 20 - protected variable :In inheritance this variable usage is recommended.
+	__z = 30 - private variable :Even child class not allowed to access this parent class variable.
+	
+SESSION 28:
+=========================
+Today we are going to discuss about Inheritance.
+Inheritance:
+=================
+It is the process of creating new class from existing class.
+In inheritance first class treated as Parent class
+In inheritance second class treated as Child class.
+Inheritance advantage is reusability. Child class can make use Parent class features.
+Extensibility also possible.
+
+Types of Inheritance:
+============================
+1)Single Inheritance: Creating a child class from single parent class called Single Inheritance.
+2)Multi Level Inheritance: Creating new class from already existing child class called Multi level Inheritance.
+3)Heirarchial Inheritance: Creating multiple child classes from single parent class called heirarchial Inheritance.
+4)Multiple Inheritance: Creating single child class from two or more parent classes.
+  *** In other programming languages Multiple Inheritance not directly supported. We needs to take help from Interface at base level incase of Java programming language.
+      But in case of Python directly supports with the mechanism of MRO (Method Resolution Order)
+	  
+SESSION 29:
+=========================
+isinstance(objectname, class name) - This is method to check whether object is an instance of particular class or not.
+issubclass(subclassname, mainclassname) - This method is used to check whether a class is subclass of particular class or not.
+Multiple Inheritance:
+==========================
+It is the process of creating subclass from multiple parent class.
+
+Constructor role in inheritance:
+======================================
+1)In Single Inheritance:
+---------------------------
+	super().__init__() - This is the way to call parent constructor into child class constructor.
+	ClassName.__init__(self) - This is the way to call parent constructor into child class constructor in case of Multiple Inheritance.
+	Ex:
+		B.__init__(self)
+	
+5)Hybrid Inheritance:
+=======================
+It is the combination of Multiple, Multilevel and Heirarchial inheritance.
+
+Polymorphism:
+=======================
+Poly means many, morph means behaviour.
+Best example is: + ---> The same symbol used to add two strings as well as two integers.
+
+There are two types of Polymorphisms:
+===========================================
+	1)Static polymorphism - Code refinement technique - Overloading
+	2)Dynamic polymorphism - Code replacement technique - Overriding
+	
+	1)Static polymorphism: a)Operator overloading  - Possible
+	                         In python every operator having magic methods such as:
+										+ ----> __add__()
+										- ----> __sub__()
+										* ----> __mul__()
+	                       b)Constructor overloading - Not possible
+						   c)Method overloading - Not possible
+						   
+	2)Method overriding     - Possible
+	  Constructor Overriding - Possible
+*****In python only operator overloading is possible. Not possible of Method and Constructor overloading.
+Overloading is nothing but method signature will be different but method name will be same.****
+	  
+SESSION 30:
+===================
+Overriding is completely depends upon inheritance concept.
+
+1)What ever implementation is there in parent class by default available to child class through inheritance.
+2)If child class not satisfy with parent class implementation the child class redefine parent class method is called method overriding i.e Dynamic Polymorphism
+
+Abstract Class and Abstract Method:
+===========================================
+Abstract Method:
+=====================
+A method which don't contain any implementation but contains only declaration is called Abstract Method.
+To make a method as abstract we should use @abstractmethod decorator.
+To leave an abstract method with no implementation then we must use pass keyword.
+As a programmer if we don't know the implementation but we know the declaration then we should go for Abstract Method.
+
+Abstract Class:
+======================
+A class which is having one or more Abstract methods called as Abstract Class.
+Abstract class also contains non abstract methods like normal methods.
+To make any class as Abstract class, that class must inherit from predefined abstract class called i.e ABC(Abstract Base Class)
+We cannot create object for Abstract class directly. To create object for Abstract class we must create one Child class and then create the object for that child class.
+Partial implementation of the class is called Abstract Class.
+****ABC and abstractmethod decorators must be present in abc module***
+
+
+Ex:
+=======
+    @abstractmethod
+	def methodOne(self):
+		pass
+
+SESSION 31:
+=====================
+Exception Handling:
+--------------------------
+Exception handling is nothing but error handling.
+In general we do write and execute the code but during this time there may be a chance of different types of error occurance.
+There are two types of errors.
+	1)Syntactical errors - Missing parenthesis, indentation errors
+	2)Runtime errors - It is abnormal termination of program execution. Abnormal termination is nothing but unsuccessfull termination.
+Runtime errors are nothing but exceptions.
+
+There are two types off exceptions:
+===========================================
+	1)Logical implementation
+	2)try except implementation
+	
+An unwanted and unexpected event will disturb the normal flow of program execution called Exception.
+In python every exception is a class.
+	1)Name error
+	2)value error
+	3)type error
+	4)zero division error
+	5)file not found error
+	6)file exist error etc.
+	
+For all the above classes Exception is the super class. The above classes will come under Exception super class.
+
+try except implementation:
+===================================
+syntax:
+--------------
+	try:
+		statements -- risky code to be included here
+	except:
+		statements -- handling code to be included here
+	finally: (It is optional in python)	-- Mandatory code
+		statements
+		
+There are two types of except block.
+	1)default except block - Except block without exception class
+	2)specific except block - Except block with exception class 
+	  Ex:
+		except ZeroDivisionError as zde:
+			print(zde)
+			
+***** When we wants to use combination of default and specific except block into the program then we must use default except block first then
+followed by default except block. ****************
+
+except (ZeroDivisionError, ValueErro) as e:
+	statements.
+		or
+except Exception as e:
+	statements
+	
+But if we used Exception(Super class) then it takes a little time to handle.
+
+Case Study:
+==================
+try:
+	Statement1
+	Statement2
+	Statement3
+except:
+	Statement4
+Statement5
+
+When executied:
+===================
+	Case 1: If no execption occured
+			Executed Statements 1,2,3 and Ignored Statement 4 and executed Statement 5
+	
+	Case 2: If there is an exception at statement1
+			Executed statement 1,4 and 5 executed.
+			
+	Case 3: If there is an exception at statement1 but corresponding except block is not matching 
+			Then it is abnormal termination
+		
+	Case 4: If there is an exception at statement 4
+	        Then always abnormal termination
+			
+**** We must use try block along with either except or finally block. Otherwise will get runtime error ****
+	
+There is only one situation where we can stop finally block execution
+os._exit(0) - PVM will shut down here.
+
+SESSION 32:
+=================
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+  
+  
+
+       
+

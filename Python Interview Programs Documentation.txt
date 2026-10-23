@@ -1,0 +1,6 @@
+# This program accepts string input and returns first non repeat character from string
+# This program accepts two inputs and returns true if both entered strings are same anagaram
+# This program accepts input string and returns longest non repeated substring from given input string
+# This program accepts two input strings and returns true if both are palindrome or else returns false
+# This program accepts input number and returns those many first prime numbers
+# Create any dimensional array using Numpy module provided that elements to be added dynamically

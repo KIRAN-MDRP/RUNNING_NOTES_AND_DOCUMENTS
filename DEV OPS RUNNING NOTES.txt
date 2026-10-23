@@ -1,0 +1,1960 @@
+DEV OPS RUNNING NOTES:
+==============================
+Learning flow will be:
+	Linux basics
+	Shell Scripting
+	AWS - To learn with this the above two are the prerequisites
+	AI Tools - Git Copilot, and Claude
+AWS: (Amazon Web Services):
+====================================
+	This has been divided into four main modules such as:
+		1)VPC
+		2)RDS
+		3)Ec2
+		4)S3, IAM
+1)VPC Module:
+======================
+	GUI, CLI, CF(Cloud Form), Terraform
+Once completed this then will start DevOps on AWS.
+
+DevOps on AWS:
+=================
+	1)Ansible + terraform
+	2)Docker + Kubernetes (K8s)+ Healm + Argo CD
+	3)CICD (Git administration, Genkins, Maven, Jfrog, Sonar, Github Actions)
+	4)Observability (Grafana)
+    5)DevSecOps
+
+AWS:
+============
+	1) AWS account login
+    2) Create AWS server and login
+    3) How to use aws server
+	
+1)VPC:
+-----------
+		VPC is nothing but networking.
+		Q)What is Networking?
+		A)Establishh communication between more than two devices. It was started as a Static network designed by US army.
+
+        Q)What is Static Network?
+        A)It is a fixed network. Fixed routing
+ 
+        Q)What is Dynamic Network?
+        A)It is always finds next immediate available routing.
+
+        ping google.com
+        tracert google.com - To check how may hops are there in between our system and google
+
+        Q)What is IP adress?
+        A)Each and every device having IP address. It is the unique Id associated with each and every machine which is used to comminicate with other device on network.		
+		Each and every IP address having 4 decimels ex: 192.168.1.2
+		Each and every decimal is octa.
+		Total Network IP = 8 + 8 + 8 + 8 = 32 bits.
+		
+		Defination: It is an Octa, decimal, unical identification number for a device is called IP Address.
+		Network Occupied Bits:
+		---------------------------
+		We needs Network ID, Host ID, Network Occupied Bits.
+		For example if IP addess is:
+			IPv4 Address. . . . . . . . . . . : 192.168.0.221 (It is my machine IP address)
+            Subnet Mask . . . . . . . . . . . : 255.255.255.0 (It is fixed for any broad band connection)
+            Default Gateway . . . . . . . . . : 192.168.0.1
+		Total Network IP = 8 + 8 + 8 + 8 = 32 bits
+		From the above IP address:
+			Network ID is: 192.168.0
+			Host ID is: 221          255.255.255.0
+			Network Occupied Bit is:  8 + 8 + 8 + 0 = 24 Bits
+			
+		For all decimals minimum value is 0 and maximum value is: 255
+		Totally 256 (0-255 range) values can be assigned to any of the decimal values.
+		
+		Q)How many IPs can be used in any network?
+		A) Formula is:  (Total Network IP - Network Occupied Bits) 
+                       2		                                   - 2
+					   *** Here 2 represents two IP addresses such as one is for Modem and another is for Machine) ******
+           So now in our above example Total network IP value is: 32 and Total Occupied Bits value is: 24    					   
+					    (32-24)          (8)        
+						2      -2      = 2  -2 = 256-2 = 254 IP addresses we can assigned under this network.
+		Another approach is max of 256 IP addresses are assigned to this type of network.  
+		
+		Q)What is default Gateway?
+		A)It is the modem 
+		
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+AWS Account and Server Creation.mp4
+================================================
+Q)What is Cloud computing?
+A)The process of accessing resources from different geographical regions over internet called Cloud Computing.
+  It is provided on rental basis and charged based on usage.
+  
+In market we do have so many cloud providers. like Microsoft Azure, Google and AWS (Amazon Web Services)
+
+
+Root user is the Super user on AWS console.
+EC2 - Elastic (Scalable) Compute Cloud
+	- It is service that is used to create server in cloud data center.
+	- We can make use the cloud infra provided by EC2 so that we can develop applications and deploy in flexible scalable format.
+	
+Steps to follow to create EC2 Instance:
+=============================================
+	1)Create AWS account and Login
+	2)Choose EC2 service once logged in
+	3)Choose launch instance (Instance is nothing but at server)
+	4)Choose instance count and name
+	5)Choose Ubuntu Linux AMI (Operating System)
+	6)Choose instance type t2.micro (1 core CPU and 1 GB ram)
+	7)Create new pem file(Password)
+	8)Choose default network and subnet
+	9)Choose security group as SSH and HTTP
+	  (SSH = Linux to Linux, HTTP = We can access webserver from internet)
+   10)Choose default 8GIb of root volume(Hard Disk)
+   11)By Choosing launch instance, We can create server on AWS.
+   
+# sudo -i
+# apt-get update
+# apt-get install apache2 -y
+# cat >var/www/html/index.html
+  <h1> Hello KiranKumar Mandarapu! Welcome to AWS Training </h1>
+  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+DevOps VPC Session 2:
+=================================
+		Q)What is Classful network?
+		A)It is a fixed or static network.(Ex: C, B, A)
+		  We can't change network or we can't customize network as well according to requirements.
+          Best example of Class C network is any end users who are accesing any network through Broadband.
+		  End users maintaining these networks.
+   
+   
+          Class C Network:
+		  ========================
+		  For example if IP addess is:
+			IPv4 Address. . . . . . . . . . . : 192.168.0.221 (It is my machine IP address)
+            Subnet Mask . . . . . . . . . . . : 255.255.255.0 (It is fixed for any broad band connection)
+            Default Gateway . . . . . . . . . : 192.168.0.1
+		  Total Network IP = 8 + 8 + 8 + 8 = 32 bits
+		  From the above IP address:
+			Network ID is: 192.168.0
+			Host ID is: 221          255.255.255. 0 
+			Network Occupied Bit is:  8 + 8 + 8 + 0 = 24 Bits
+
+
+	      Class B Network:
+		  =======================
+		  All Internet Service Provides (ISPs) fall under Class B Network.
+		  ISP providers are maintaining Class B network.
+	      IPv4 Address. . . . . . . . . . . : 192.168.1.221 (It is my machine IP address)
+            Subnet Mask . . . . . . . . . . . : 255.255.0.0 (It is fixed for any broad band connection)
+            Default Gateway . . . . . . . . . : 192.168.0.1
+		  Total Network IP = 8 + 8 + 8 + 8 = 32 bits
+		  From the above IP address:
+			Network ID is: 192.168
+			Host ID is: 0.221        255.255. 0 . 0
+			Network Occupied Bit is:  8 + 8 + 0 + 0 = 16 Bits
+	 
+	      Q)How many IPs can be used in any network?
+		  A) Formula is:  (Total Network IP - Network Occupied Bits) - 2
+                       2		
+					   *** Here 2 represents two IP addresses such as one is for Modem and another is for Machine) ******
+           So now in our above example Total network IP value is: 32 and Total Occupied Bits value is: 16    					   
+					    (32-16)-2       (16)-2     14
+						2            = 2       = 2   = 16384 IP addresses we can assigned under this network.
+		  
+		  256* 256 = 65536 IP addresses can be assigned by this type of network
+		  
+          Class A Network:
+          =========================
+          BroadBand providers are nothing but Class A Network. Ex: TCS (Tata Communication Services)
+          IPv4 Address. . . . . . . . . . . : 192.168.1.221 (It is my machine IP address)
+            Subnet Mask . . . . . . . . . . . : 255.0.0.0 (It is fixed for any broad band connection)
+            Default Gateway . . . . . . . . . : 192.168.0.1
+		  Total Network IP = 8 + 8 + 8 + 8 = 32 bits
+		  From the above IP address:
+			Network ID is: 192
+			Host ID is: 168.0.221    255. 0 . 0 . 0
+			Network Occupied Bit is:  8 + 0 + 0 + 0 = 8 Bits
+			
+		  256 * 256 * 256 = 16777216 IP addresses can be assigned by this network. 
+		  
+Q)What is Classless Network?
+A)CIDR (Classless Inter Domain Routing)
+  Advantage is: It is not a fixed network.
+  We can customize or create our own network.
+  ***** It is Octa decimal number format *****
+  We can use either 1 or 0
+  It is binary format.
+  
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+DevOps VPC Session 3:
+=================================
+    Cashless Network continuation:
+	===================================
+	For example if IP addess is:
+			IPv4 Address. . . . . . . . . . . : 192.168.0.221 (It is my machine IP address)
+            Subnet Mask . . . . . . . . . . . : 255.255.255.0 (It is fixed for any broad band connection)
+            Default Gateway . . . . . . . . . : 192.168.0.1
+		  Total Network IP = 11111111 + 11111111 + 11111111 + 11111111 = 32 bits
+		  From the above IP address:
+			Network ID is: 192.168.0
+			Host ID is: 221          255.255.255. 0 
+			Network Occupied Bit is:  11111111 + 11111111 + 11111111 + 0 = 24CIDR 
+
+Router and Modem:
+=======================
+Router - It is a device which is used to establish network.
+Modem - It is the bridge between our private network to public network. With the help of Modem we are able to connect internet.
+
+Private IP and Public IP:
+=======================================
+Each server will have both Private IP and Public IP.
+By using Private IP we can communicate with devices those are present on the same network.			
+By using Public IP we can communicate with devices on different network.(Networks over a network)
+
+NAT - Network Access Translator - It acts as bridge between Private IP and Public IP.
+**** We use Modem to connect Public IP from Private IP at home. But internally those will take help from NAT ************
+
+How NAT works?
+NAT server having Private IP and Public IP. 
+NAT used to convert Private IP to Public IP and vice versa.
+NAT servers are maintained by ISP people.
+For example from our laptop we are accessing youtube then the flow will be like below.
+		1)First we send request to NAT server in order to get access of youtube.
+        2)Now NAT server converts your laptop Private IP into Public IP.
+        3)Youtube having public IP. So NAT server routes that request to Youtube through Public IP of NAT server.
+        4)Anyway Public IP to Public IP possible right. So access will get provided.
+        5)In reverse order NAT server converts Public IP to Private IP and provides access.		
+
+Q)What is Subnet?
+A)The main network spliting into the subnet works.
+  Main Network - 192.168.0.0/22
+  Subnet 01 - 192.168.0.0-255/24
+  Subnet 02 - 192.168.1.0-255/24
+  Subnet 03 - 192.168.2.0-255/24
+  Subnet 04 - 192.168.3.0-255/24  
+  
+Subnet Calculation:
+========================
+ n
+2  Needs to calculate from right to left.
+		  
+		  
+DevOps With VPC See
+=================================		  
+1)Create a VPC with CIDR range of 192.168.0.0/22 (Main network)
+2)Create a public subnet with CIDR range of 192.168.1.0/24
+3)Create a private subent with CIDR range of 192.168.2.0/24
+4)Create a Public routing table associated with Public subnet
+5)Create a Private routing table associated with Private subnet.
+6)Create MyiGW associated with myVPC
+7)Create route MyiGW (Internet Gateway) associated with my Public routing table.
+8)Create a Public instance on public subnet
+9)Try to login into public instance from your laptop.
+
+***One routing table can associate with multiple subnets****
+
+
+
+
+Docker:
+=====================
+EC2 - Elastic Compute Cloud which is like a normal desktop.
+Git for windows used to connect windows system with linux cloud machine
+sudo -i 
+apt-get update
+apt-get install apache2 -i 
+once server installed through public ip we can access from anywhere
+
+Q)What is Docker?
+A)It is a containers tool. Actually it is a company that is providing container technologies.
+
+Q)What is Docker Container?
+A)Docker container is a isolated area. Isolated means a separate area from server environment for each container.
+  By using container we can deploy applications such as websites
+  Very easily with low cost and high performance.
+  
+  
+Steps to create container:
+================================
+1)Create a AWS server and login
+  Commands:
+	sudo -i
+	apt-get update
+
+2)Install docker
+  Go to docker website
+  
+3)docker --version
+  docker ps
+  docker run --name container1 -d -p 8081:80 nginx
+  
+  
+17th SEPTEMBER 2026 BATCH:
+====================================
+DEMO 1:
+================
+What is DevOps?
+A)The combination of development and operations is called as DevOps (Development and Operations) practises that aims to shorten Software Development Life Cycle and deliver
+high quality software continuosly.
+
+DevOps Life Cycle:
+===================
+Plan >> Coding >> Build >> Test >> Release >> Deploy >> Operations >> Monitor
+
+This entire process is called as DevOps Life Cycle.
+
+Modules:
+===============
+1)DevOps Fundamentals and SDLC
+2)Linux & Shell Scripting
+3)Networking Fundamentals
+4)AWS Cloud & Services
+5)Git and Version Control
+6)CI/CD Pipelines (Jenkins + Github Actions)
+7)Infrastructure as Code (Terraform) - Infrastructure Management
+8)Configuration Management (Ansible) - Configuration Management
+9)Docker Containerazation
+10)COE: Kubernetes & EKS
+11)GitOps: ArgoCD
+12)Monitoring & Observability
+13)DevSecOps
+14)AI tools for DevOps & Automation
+15)Real-time projects and Interview Preparation.
+
+*** Recommended AI Tools are:
+    ============================
+    GitHub Copilot
+	ChatGpt
+	ClaudeCode  ******
+	
+Assignment:
+=====================
+Steps to create AWS account:
+------------------------------------
+	1)Go to the below link and create account with gmail id
+	      https://signin.aws.amazon.com/signup?request_type=register
+		  
+    2)Create root user with any personal mail id and password.
+	3)Create passkey to login frequently on system.
+	4)Make a note of this for future logins
+	
+Steps to create server:
+-------------------------------
+Go to EC2 console >> Launch instace >> Under Name and Tags give the server name Ex: TestServer1 >>
+Select Architecute 64-bit(x86) >> Instance type t2micro >> 
+
+
+DEMO 2:
+================
+AWS we will learn in these below forms
+GUI - Grafical User Interface
+CLI
+GF
+TF - Terraform is the infrastructure creation platform that is used to create any infrastructure in any cloud.
+     It is cross cloud platform
+	 
+SESSION 1:
+=============
+DevOps: 
+========
+	Docker + K8s + helm + Argo CD. The above is the path.
+	
+Docker:
+============
+Today we are going to create a component in EC2 server.
+This component is nothing but a Desktop.
+
+EC2 - Elastic cloud computing.
+
+Steps to create instance in EC2:
+=========================================
+	1)Click on Launch instance 
+	2)Number of Instances 1
+	3)From Application and OS images select Ubuntu
+	4)From Instance type select t3 Micro
+	5)Create new key pair. Once we created one .pem file will be generated. This .pem file is important and we need this to make use this component in future.
+	6)After that in Network settings click on edit >> Select default network in VPC-Required dropdown >> Under Inbound Security Groups select Type is All traffic >>
+	  Under Configure Storage select 8GB Harddisk.
+	7)Then click on launch the server. With this component successfully created.
+	8)Now we are able to see that server in instances tab with running state.
+	9)Download Git for windows software in your machine
+	10)Go to the .pem file location open git bash and execute below command
+	   ssh -i "TestComponent01.pem" ubuntu@ec2-100-55-63-99.compute-1.amazonaws.com >> Then it will be prompted for fingerpring type yes and proceed
+	11)Now type sudo -i click >> type apt-get update and click. This is the default first command we should execute once connected to any server.
+	12)If we wants to install apache2 software then execute below command
+	   apt-get install apache2
+	13)Now access the server through Public IPv4 Address from browser like below url
+       https://100.55.63.99
+	14)After successfull access we are able to see Apache2 default page.
+	
+What is Docker?
+A)Docker is a company it provides container technologies.
+
+What is Docker container?
+A)It is an Isolated area. Isolated area is nothing but separate or dedicated area from server environment for application.
+  By using container we can deploy applications with low cost and high quality, high performance.
+
+Practical Implementation:
+=================================
+1)Create AWS server and login
+  commands:
+			sudo -i
+			apt-get update
+			
+2)Install docker:
+  -----------------
+	To install docker go to below url:
+	https://get.docker.com/
+	
+	and execute below command
+	
+	curl -fsSL https://get.docker.com -o install-docker.sh
+	
+	then execute sh install-docker.sh
+	then execute docker --version
+	then execute docker ps
+	
+3)Create containers:
+--------------------------
+	Execute below command to create containers
+		docker run --name container1 -d -p 8081:80 nginx
+        docker run --name container2 -d -p 8082:8080 jenkins:2.60.3
+        docker run --name container3 -d -p 8083:8080 maha4iac/mahalogin:1
+
+		
+	Now we can execute the command docker ps
+	Now we are able to see the created containers.
+	
+SESSION 2:
+==============
+What is container?
+It is an isolated area where we can host servers, applications and database so that we can access over network through URL.
+
+How to create container?
+
+Steps:
+=======
+Images are available in hub.docker.com.
+
+Steps to create container:
+================================
+	1)Check any images are there docker images
+	2)Check any containers are running or not 
+	    docker ps
+		Which returns all running containers
+		
+		docker ps -a 
+		Which returns all running and stopped containers
+		
+	3)docker run -d nginx 
+	  Downloads nginx image and container created.
+	  
+	  with name:
+	  docker run --name container1 -d nginx
+	  
+	4)*** Always first delete container ***
+      To delete container:
+	  docker rm container name or container id	
+	  
+	  To delete image:
+	  docker rmi image name or image id
+	  
+	5)To get all details about container execute below command
+	  docker inspect containername
+	  
+	6)To get only Id information of containers then we must execute
+	  docker ps -a -q
+	  Will get only Ids.
+	  
+	7)To delete all containers with single command:
+	  docker rm $(docker ps -a -q)-f 
+	  
+	8)To get all images ids
+	  docker images -a -q
+	  
+	9)To delete all images
+	  docker rmi $(docker images -a -q) -f
+	  
+	10)To download image without creating container
+	  docker pull nginx
+	  
+	11)To verify image is available or not
+	  docker search nginx
+	  
+SESSION 3:
+=================
+We can install docker host on ubuntu machine through following steps mentioned in below portal url:
+=======================================================================================================
+	https://docs.docker.com/engine/install/ubuntu/
+	
+	These all steps are present in install-docker.sh file. 
+
+Today our agenda is Docker Architecture (ARK):
+===================================================
+docker run  = Search image + Pull image + Create container
+Docker run command involved three actions which are described below.
+
+	1)Search image in local and remote.
+	2)Pull image
+	3)Create container.
+	
+Docker architecture:
+===============================
+	We have three components.
+		1)Docker client - Run command
+		2)Docker engine (Docker Application Container Engine)  - Docker daemon
+		  In docker engine we have one local component called Local Register and by default it is empty
+		  Docker engine is nothing but a https://hub.docker.com
+		  When we execute docker run --name container1 -d nginx first docker engine checks this image availability in local if not available
+		  then it will search in remote with Docker Search if it finds then engine pulls image and creates container. Like this n number of 
+		  containers will get created.
+		  
+Docker LifeCycle:
+==========================
+There are two stages.
+			1)Docker container running state.
+			2)Docker container stop state.
+			
+			                           Docker container running state
+									   ||                        ||
+			                 docker start containername       docker stop containername						   
+									   ||                        ||    
+									   Docker container stop state
+									   
+How to delete container?
+A)First stop the running container
+   command: docker stop container1
+   
+  Now delete the container
+   command: docker rm container1
+   
+*** When ever docker host restarts, all containers which are there under this docker host will be moved from running state to stop state.*****
+In Windows or any operating we have services which starts automatically whenever OS starts. In simillar way if we wants to apply for container with below command.
+But we should apply this feature while container creating time only. After that if we wants to apply then it is not possible.
+
+Command: docker run --name container1 --restart always -d nginx
+
+--name:
+==========
+	*** Without name in run command container won't get created. If we won't provide any name docker engine will provide some miscellaneous name 
+	Conatiner name must be unique.*****
+	
+What is terminal?
+A)It is user interface to execute bash commands.
+
+
+Docker Modes:
+====================
+We have three modes of docker
+-d:
+====
+   d means detach.
+   
+	1)Attach mode: without -d
+	  When you creating container, the container will be attached with terminal, running on fore ground with terminal. And when we close terminal automatically container will get closed.
+	  command: docker nginx
+	  
+	2)Detach mode: with -d
+	  When you creating container, in this mode container will be created, run and even terminal closed container won't get stopped.
+	  command: docker -d nginx
+	  
+	3)Interaction mode: with -it
+	  After creation of container we can getting into the command by interaction mode.
+	  command: docker exec --it container1 /bin/bash
+		
+
+SESSION 4:
+=====================
+	docker exec -it container1 /bin/bash/
+	What is /bin/bash/ here?
+	A)It is user workspace or shell where we can execute commands.
+	
+Linux commands:
+=====================
+vi /etc/passwd	- To see all users and default workspace or shell
+touch f1 f2 f3  - To create three files like f1, f2 and f3
+ls -la          - To view files are present in shell.
+adduser username- To create new user
+su username     - To login into the particular user
+
+
+Operating System is nothing but interface between user and hardware components.
+
+                 Hardware 
+                    |
+                 Kernel
+				    |
+				 Shells    (/bin/bash) Every user having their own shell
+				    |
+				 Utilities (Commands)
+
+
+Port Forwarding:
+=========================
+-p 8083:8080
+	port is an unique number.
+	ipaddress is an unique number for a device through which we can communicate with that device. Obviously public ip.
+	
+*** When we wants to access any container over internet then only we should go for port forwarding.
+    If we don't wants access container over internet then no need of go for the port forwarding *****
+	
+SESSION 5:
+===========
+-p  8081             :80
+   (Host port number) (Guest Container)
+   
+   **** Host port number can be anything but Guest port number must be use as per the application image build Can't change at container level.
+   Means while any application image building whatever port we have used that same port number we have to use here.   *****
+   
+There are three types of Operating Systems:
+===============================================
+	1)Single user Single Task Operating System - MS-Dos
+	2)Single  user Multi Task Operating System - Windows
+	3)Multi user multi task Operating System - Linux, Unix
+
+****For Operating system container is just like a folder where as application point of view container is a separate new entity or server.****
+Containers are located at /var/lib/docker/container folder on Docker host machine.
+And for each file first 12 characters will be matched with docker id.
+And images stored at /var/lib/docker/container/image folder.
+
+**** What ever information we are getting with command docker inspect containername will be stored using Hashcode mechanism *****
+	
+process IDs will get created for each transaction.
+command: ps
+
+When ever new container created, for each container separate Process ID, Network Id, Mount will get created.
+How Docker container works?
+A)
+
+SESSION 6:
+=========================
+**** Docker volumes are used to persistent the data so that though container deleted no data lost will be happens *****
+Mount point is nothing but a separate drive.
+To handle data inside containers we needs docker volumes.
+Docker Volumes:
+================
+To get list of docker commands enter below command on Docker prompt
+
+	docker volume >> Then will get below all listed commands
+	Commands:
+		create      Create a volume
+		inspect     Display detailed information on one or more volumes
+		ls          List volumes
+		prune       Remove unused local volumes
+		rm          Remove one or more volumes
+		
+To create volume for a container below is the command:
+==========================================================
+	docker run --name container1 -d -v volume1:/home -p 8081:80 nginx
+	Here volume name is volume1 which is located under docker host machine at location /var/lib/docker/volumes
+	and path is /var/lib/docker/volumes/volume
+	
+	/home is the path on container. Means what ever files are present on container at /home location those all files will be persistant on Docker host machine at
+	/var/lib/docker/volumes/volume1/_data location.
+	
+If we wants to maintain all containers data into one volume:
+=============================================================
+	docker run --name container1 -d -v /home/ubuntu/commanvolume:/home -p 8081:80 nginx
+	docker run --name container2 -d -v /home/ubuntu/commonvolume:/home -p 8081:80 nginx
+	docker run --name container3 -d -v /home/ubuntu/commanvolume:/home -p 8081:80 nginx
+    docker run --name container4 -d -v /home/ubuntu/commanvolume:/home -p 8081:80 nginx
+	
+To create a container with existing volume data:
+====================================================
+df -h : To see the mount points.
+These volumes are available on docker host machine at location /var/local/docker/volumes/
+To view the file inside the volume we needs to go below location.
+/var/local/docker/volumes/volume1/_data
+
+SESSION 7:
+=================
+Topic for today is Docker networking.
+
+To get all docker network commands type
+
+root@ip-172-31-30-211:~# docker network
+Usage:  docker network COMMAND
+
+Manage networks
+
+Commands:
+  connect     Connect a container to a network
+  create      Create a network
+  disconnect  Disconnect a container from a network
+  inspect     Display detailed information on one or more networks
+  ls          List networks
+  prune       Remove all unused networks
+  rm          Remove one or more networks
+
+Run 'docker network COMMAND --help' for more information on a command.
+
+To check connectivity type below command:
+==============================================
+	ping ipaddress of any container 
+	The above should be used from first container
+	
+	For example we are trying to connect container2 from container1. Then we have to follow below steps.
+	Step1:
+	------
+		Collect container2 ip address
+		
+	Step2:
+	------
+		Login into container1
+		command:
+		---------
+			docker exec -it container1 /bin/bash
+			
+	Step3:
+	------
+		apt update
+		
+	Step4:
+	-----
+		apt install iputils-ping -y 
+		
+To create our own network:
+==============================
+	docker network create -d bridge --subnet 192.168.0.0/24 network1
+	Here:
+	-----
+	-d stands for driver 
+	network1 is the network name
+	
+https://subnet.calculator.com
+This portal used to calculate subnets count.
+
+*** We can communicate different containers on same docker host machine through bridge driver ****
+
+To create container with created customized network:
+=======================================================
+	docker run --name conatiner1 --network network1 nginx
+	docker run --name container1 --network network1 -d -v volume1:/home -p 8081:80 nginx
+		
+*** In default network it is not possible to ping another container from one container is not possible but it is possible using customized network ****
+
+SESSION 8:
+================
+How to build our own image is the today topic.
+
+Dockerfile:
+=================
+It is plain english text template in which we will mention what we do require.
+For any customized image we must use base image.
+Docker image tags. Under base image we do have n number of tags. Based on our requirement we must use it.
+
+Under Dockerfile:
+========================
+Docker file is plain text simple format to build the images.
+
+Contents in Dockerfile:
+============================
+FROM ubuntu:14.04
+MAINTAINER kirankumar0604@gmail
+RUN apt-get update
+
+CMD ["echo", "hello KiranKumar"]
+echo command used to print our message continuosly.
+
+CMD ["ping", "google.com"]
+
+Steps:
+===========
+	1)create folder on Docker host machine.
+	  mkdir mydockerimage >> cd mydockerimage >> vi Dockerfile 
+	  
+	2)In file write below content
+      FROM ubuntu:14.04
+	  MAINTAINER kirankumar0604@gmail
+	  RUN sudo apt-get update
+	  RUN sudo apt-get install apache2 -y
+      CMD ["echo", "hello KiranKumar"]
+      CMD ["ping", "google.com"]	
+	  
+	3)Save file
+	  :wq!
+	
+	4)Where exactly Dockerfile is located from there execute the below command.
+	  docker build -t myimage:1 .
+	  
+******Note:
+	  =====
+		1)When docker image build happens all lines in docker file commands will get executed except CMD line.
+		2)When CMD command executed then container will be running state, where as CMD commands execution completed then automatically
+		container state change into stop state. 
+		3)If the CMD command continuosly executing then container will be present in running state only.
+		4)CMD command can change on runtime (While creating containers)
+		5)By ENTRYPOINT we can do what should be the first command to be executed but we cant change it on runtime
+		6)We can change commands those are mentioned under CMD at run time but can't change the command which are mentioned under ENTRYPOINT.
+		****
+	
+SESSION 9:
+====================
+Now we are able to deploy our own java web application.
+
+To know any service running status command is:
+	service servicename status
+	
+	Ex: service apache2 status
+	
+	service tomcat start
+	service tomcat stop
+	service tomcat restart
+	
+
+Steps to deploy our own java web application on tomcat container:
+====================================================================
+	1)Build the Java Application and place it into the S3 bucket. (We needs to paste .war file under S3 bucket)
+	
+	2)Copy the Object URL.
+	
+	3)Command to download the application is 
+	  wget application war file.
+	  
+	4)Install tomcat
+	5)Start tomcat
+	6)Stop tomcat
+	7)Restart tomcat
+	  
+	  
+What is the Terminal?
+A)An interface where we execute our commands is called terminal.
+
+      To start any service on container we can do it in three ways.
+	  For example if we wants to run the Tomcat server
+	  
+	  Way1:
+	  ====
+	  startup.sh - To start tomcat server in background and capture it into the log file.
+	  catalina.sh - To start tomcat server in foreground and writes logs in terminal itself.
+	 
+Steps to deploy java applications:
+======================================
+
+*** For tomcat image reference please go to below portal
+    https://hub.docker.com/_/tomcat 
+	and check any Dockerfile at bottom ****
+	
+	1)Create directory mkdir myjavaapp
+	2)Go to that folder cd myjavaapp
+	3)Download application image using wget command
+	  wget myjavaapp.war file.
+	  
+	4)Create Docker file.
+	  command is:
+	    nano Dockerfile
+	5)Open the Docker file.
+	  vi Dockerfile
+
+	  Content:
+	  ------------
+	  FROM tomcat:11-jdk21
+	  LABEL maintainer="KIRANKUMAR0604@GMAIL.COM"
+      COPY app1.war /usr/local/tomcat/webapps/
+      EXPOSE 8080
+      CMD ["catalina.sh", "run"]	  
+	  
+	  :wq!
+	  
+	6)Then run the build 
+	  docker build -t app1:1 .
+	  
+	7)We must get FINISHED message on terminal.
+	
+	8)Create docker container
+	  docker run --name container1 -d -p 8081:8080 app1:1
+	  
+	9)Check container1 status. It must be up and running state.
+	  docker ps -a
+	  
+   10)Copy container public URL from AWS portal. It will be there under EC2 >> instances >> particular instance >> Public IPv4 address
+   
+   11)Open webbrowser and check whether you are able to access or not java app.
+      If public url is: 54.161.43.18
+	  java app port is: 8080
+	  container port is: 8081
+	  
+	  Then url looks like below.
+	  http://54.161.43.18:8081/app1/
+	  
+	  If success then you should be able to access the Java Web Application.
+	  
+**** In the above steps at step number 5 we have kept app1.war and from there we are placing into the tomcat.
+     But if we wants to copy from web then we have to use ADD command. 
+	 Once we logged into the container if we wants to change default location then in Dockerfile we have to use WORKDIR command.
+	 Then updated Dockerfile contents looks like below.
+	 
+	 FROM tomcat:11-jdk21
+	 LABEL maintainer="KIRANKUMAR0604@GMAIL.COM"
+     ADD https://java-app-bucket.s3.us-east-1.amazonaws.com/app1.war /usr/local/tomcat/webapps/
+	 WORKDIR /usr/local/tomcat/webapps/
+     EXPOSE 8080
+     CMD ["catalina.sh", "run"]	  
+********	 
+	  
+**** To install openjdk we can use it chocolatey portal ****
+***** If we opened Dockerfile through nano command then to save and exit follow below steps.
+
+      ctrl + 0  - To save
+	  Enter   - To confirm the file name
+	  ctrl + X  - To exit
+	  *********
+	  
+SESSION 10:
+=======================
+Steps to create Bucket:
+==============================
+	1)Select bucket type General purpose
+	2)Uncheck Block all public access
+	3)Check the acknowledge
+	4)Select Object Ownership as ACLs enabled and click on upload
+	5)After upload war file, select that war file and go to action >> select Make public ACLs >> close.
+	
+	
+SESSION 11:
+=====================
+To upload our application images into hub.docker.com below are the steps.
+Steps:
+============
+	1)Login into hub.docker.com
+	2)Duplicate the current image with below command
+	  docker tag app1:1 kirankumarmandarapu/app1_10_10_2026:1
+	  
+	  In above command 
+		app1:1 is the current image.
+		kirankumar0604@gmail is the user name of hub.docker.com
+		app1_10_10_2026:1 is the duplicate image which we will use to upload in hub.docker.com portal.
+		
+	3)Login into the docker hub from docker host machine with below command
+	  docker login -u kirankumarmandarapu
+	  
+	  prompted for password type password.
+	  
+	4)docker push kirankumarmandarapu/app1_10_10_2026:1
+	  Here kirankumar0604@gmail/app1_10_10_2026:1 is the duplicated image.
+	  
+C Groups:
+===================
+	Docker C groups stands for Docker Control Groups
+	It is controlling Memory, CPU, I/O and Disk etc.
+	By default container has no resource constraint.
+	To know about each container utilization use below command
+		docker stats
+	Once any container utilization reaches into maximum limit then docker host machine will get hanged.
+	So we can controll Memory, CPU, I/O and Disk of each container through C Groups.
+	We have two types of memories, those are RAM and HardDisk.
+	Difference between these are, RAM is temporary memory where as Harddisk is the permanent memory.
+	In linux we have two types are there like 
+		First type of memory (RAM)
+		SWAP memory = When original memory maximum limit reached then to keep docker host mahine up and running SWAP memory will be used.
+		Generally SWAP memory will be 2 times more than RAM. For example if RAM is 2 GB, SWAP memory will be 4GB.
+		
+SESSION 12:
+==================
+Steps:
+-------------
+	1)Open grub file in linux.
+	   vi /etc/default/grub
+	   
+	2)Copy this below command and paste it.
+	  GRUB_CMDLINE_LINUX = "cgroup_enable=memory swapaccount=1"
+	
+	3)Update the grub
+	   sudo update-grub
+	   
+	4)Reboot the system
+	   sudo reboot
+	   
+	5)Wait for 2 minutes and re connect.
+
+We have three types of memory commands
+
+   -m   or --memory
+   
+   --memory-reservation
+   
+   --memory-swap
+   
+Examples:
+-----------------
+	docker run --name container1 -d -m 300m -p 8081:8080 nginx
+	docker run --name container2 -d -m 300m --memory-swap 400m -p 8082:8080 nginx
+	docker run --name container3 -d -m 300m --memory-swap 400m --memory-reservation 100m -p 8083:8080 nginx
+	
+Reservation memory is used in emergency to escape the situation where docker host machine will be hanged due to maximum memory capacity reached.
+
+Similarly we can do it for CPU also.
+    	docker run --name container3 -d -m 300m --memory-swap 400m --memory-reservation 100m -p 8083:8080 --cpus=.5 nginx
+		
+Docker compose:
+========================
+	The main advantage of docker compose file is at a time we can create and manage multiple containers.
+	
+	Steps to create docker compose:
+	===================================
+		1)Create one folder on docker host machine.
+			mkdir composefolder
+			
+	    2)Go to that location.
+			cd composefolder
+			
+		3)Give the below command
+		    nano compose.yml
+			
+		4)Suppose we wants to create two containers (One is for Java Web application and another is nginx) Then compose.yml file contents are like below.
+          
+			services:
+			  webserver:
+                image: nginx
+                ports:
+                  - "8081:80"
+              web:
+                image: kirankumarmandarapu/app1_10_10_2026:5
+                ports:
+                  - "8082:8080"
+
+        5)Then type the below command
+			docker compose up -d : To create and start all services in background
+		6)On successfull containers creation we are able to access the server and application.
+		
+		7)With respect to docker compose we must remember below commands.
+		  Commands:
+		  ---------------
+			1)docker compose up -d : To create and start all services in background
+			2)docker compose down  : Stop and remove the Compose-managed containers and network
+			3)docker compose ps    : Check service status
+			4)docker compose logs  : View application logs
+			5)docker compose restart: Restart services
+			6)docker compose pull  : Download the configured images
+			
+SESSION 13:
+===================
+What is Kubernetes?
+A)It is container orchestration tool.
+  Orchestration means its a kind of managing or controlling or organizing the containers.
+  It is open source.
+  Google invented Kubernetes.
+  Short form Kubernetes is K8S.
+  
+Disadvantages of Containers:
+================================
+	Lack of scalability
+	Lack of Highly availability
+	
+K8S came into picture to fulfill the loop holes of Containers.
+
+  
+Multi-host Overlay networking:
+=============================
+	Internally virtual overlay (VXLAN tunnel) established in between multiple docker host machines.
+	Virtual Ethernet Card will be created for each containers through that communication will be happens
+	
+K8S clusters:
+====================
+	Using clusters we are able to achieve High availability at any cost. So that we ensure that there is zero downtime.
+	Here we do have only two major components Master and node.
+	Ansible Master and ansible Node.
+	
+We do write manifest file and upload it into the master component of K8S.
+Master is the responsible to manage containers.
+Actual work done by the node it self.
+
+Master Component:
+=======================
+	He is the decision member
+	He is authorized person.
+	We have 4 components
+		API server - Authenticated person.
+		Cluster storage KV - Memory
+		Schedular - Will assign task
+		          - Watch changes like monitoring.
+				  
+		API Server :
+			It is frontend controller.
+			Manifest file will be handed over to API server.
+			
+	    Cluster Storage :
+			It is persistant storage
+			
+		ETCD(etcd) - Watcher.It is distributed,
+		
+		Kube-Controller-Manager 
+		Kube Schedular: Keep on watching api server and what ever decisions made by apiserver those will be passed to node.
+		
+Based on cluster storage (KV) apiserver will make decision.
+	
+Node:
+=========
+	There are 3 components
+	1)Kubelet agent - It is a dummy agent.Actual walk will be done by kubelet itself. Either creation or deletion etc.
+	            If the Pod is gone report back to master.
+	2)Container engine - This is required by Kubelet agent to create any container.
+	3)Kube proxy -  By using kube proxy we can establish communication in between Nodes, container and pods.
+	
+SESSION 14:
+=================
+Declarative Model and Desired State
+	Manifest file updating into the Apiserver
+	Desired state is create and maintain 3 pods
+	
+Pod:
+=========
+	It is a minimal atonomic unit of K8S.
+	In K8S pod is the minimal part we create.
+	Containers always runs in pods.
+	Pod can contain one or multiple containers.
+	All container inside a pod shares pod environment.
+	If one pod having multiple containers that is nothing but tightly coupling which is not recommended.
+	So recommended is one pod and one container.
+	Pod life cycle is 
+		pending 
+		running 
+		succeded or failed.
+	
+K8S setup:
+=================
+We can find installation steps from below portal
+	https://www.kubernetes.io
+	
+SESSOIN 15:
+==============
+Today we are going to install and configure Kubernetes (K8S) on new docker host machine.
+
+Best OS and memory for K8S is ubuntu 20 and M5.large. So while creating new instance please select those two components.
+
+Steps:
+===============
+	1)After log on into the AWS account click on launch instance.
+	2)Under Name and Tags >> Name >> leave it blank why because we needs three instances now.
+	3)Select OS as Ubuntu Pro - Ubuntu Server Pro 24.04 LTS (HVM) from market place
+	4)Select instance type as t3 large
+	5)Select Number of instances as 3 (We require one Master and two Nodes)
+	6)Select existing key pair under key pair dropdown.
+	7)Select All traffic under Network tab
+	8)Select 20GB under Configure storage drop down.
+	9)Click on Launch instance.
+	10)Under running instances tag give name for each instance like
+	    K8S_Master
+		K8S_Node01
+		K8S_Node02 respectively
+	11)Now open each instance in git bash and execute all below commands on each instance. 
+	12)	sudo apt-get update
+       	sudo apt-get install docker.io -y
+        sudo apt install -y containerd
+        sudo mkdir -p /etc/containerd
+        containerd config default | sudo tee /etc/containerd/config.toml
+    	sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
+    	sudo systemctl restart containerd
+    	sudo systemctl enable containerd
+    	sudo swapoff -a
+     	sudo sed -i '/swap/d' /etc/fstab
+		sudo apt-get update
+    	sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+    	sudo mkdir -p -m 755 /etc/apt/keyrings
+    	curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+    	echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+    	sudo apt-get update
+    	sudo apt-get install -y kubelet kubeadm kubectl
+    	sudo apt-mark hold kubelet kubeadm kubectl
+    	sudo systemctl enable --now kubelet
+	13)Make a note of Master, Node01, Node02 Ips. 
+	      Master - root@ip-172-31-39-15
+		  Node01 - root@ip-172-31-39-50
+		  Node02 - root@ip-172-31-46-68
+	14)Now execute below commmand on Master instance only
+	      sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+	   Once executed the above command then it will return three more additional commands. Copy those on notepad and execute one by one on Master instance only.
+	   For example we have got below information once executed the above command.
+          mkdir -p $HOME/.kube
+          sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+          sudo chown $(id -u):$(id -g) $HOME/.kube/config
+          sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+	 15)Now execute all the above 4 commands on Master instance.
+     16)Now execute below commands on all node instances. (Node01, Node02)
+          kubeadm join 172.31.43.144:6443 --token 3pn3hh.gjylv106ucct2ryq \
+       --discovery-token-ca-cert-hash sha256:a91e64e0cb00c6d12c93a742b5666661c56cffdc7250002c32a21fb678187702
+	   
+	 17)Make use below command on Master instance to generate fresh token which will be used to join any node with master instance.
+        sudo kubeadm token create --print-join-command	 
+		
+How to create manifest file and upload?
+A)From master machine create one manifest yml file. Content is below.
+  
+kubectl commands:
+========================
+  kubectl get nodes : To get all nodes information
+  kubectl create -f manifestfilename.yml : To create manifest file. It will be done on Master machine.
+  kubectl get pods : To get minimal information about all pods.
+  kubectl describe pods : To get full details about all pods or particular pod.
+  kubectl get pods -o wide : To get wider information about pods.
+  kubectl get pods/podname : To get information about only mentioned pod
+  kubectl delete pod/podname: To delete a particular pod
+  kubectl get pods --all-namespaces :To see all the pods
+  
+Sample manifest file:
+=========================
+	nano nginxpod.yml
+	
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
+      ports:
+        - containerPort: 80
+
+	
+SESSION 16:
+================
+Where exactly we needs to write these manifest files?
+It is not possible. Through VS code we can write these manifest files.
+
+Now login into the github account and generate new token.
+Steps to generate new token:
+================================
+	1)Login into GitHub portal.
+	2)Goto Home >> Settings >> Developer Settings >> Personal access tokens >> Tokens(Classic) >> Generate new token >> Generate new token(Classic) 
+	 >> Give any name in Note text field >> Under Select scopes check all check boxes >> Click on Generate Token
+Open VS code and install kubernetes extension on VS code
+    3)Create new repository in GitHub.
+	4)Created new repository with below name
+	  manifest_14_OCT_2026
+    5)Copy all the below commands from Github 
+	  git init
+	  git add README.md	
+	  git commit -m "first commit"
+	  git branch -M main
+      git remote add origin https://github.com/KIRAN-MDRP/manifest_14_OCT_2026.git
+      git push -u origin main
+	6)Open the VS code create one folder with the above project name (manifest_14_OCT_2026)
+	7)Go to that folder location in terminal and execute all the above git commands.
+	8)On successfull execution we are able to see the local files in GitHub Repository.
+	9)Copy the repository HTTP url from Git hub and goto Master instance from github 
+	10)Paste there this URL and press enter.
+
+By using kind: Pod we are able to create at most one container.	
+By using Replication Controller, we can create n number of pods.
+
+Then updated manifest file looks like below.
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: myrc
+spec:
+  replicas: 3
+  selector:
+    app: nginx-app
+  template:
+    metadata:
+      name: nginx-app
+      labels:
+        app: nginx-app
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+          ports:
+            - containerPort: 80
+			
+Ex2:
+==========
+File Name: sampleJavaApp.yml
+
+Content is:
+==============
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: java-app-rc
+spec:
+  replicas: 4
+  selector:
+    app: java-app
+  template:
+    metadata:
+      name: java-app
+      labels:
+        app: java-app
+    spec:
+      containers:
+        - name: java-app-container
+          image: kirankumarmandarapu/app1_10_10_2026:5
+          ports:
+            - containerPort: 8080
+			
+		 
+kubectl get rc : To see the RC
+kubectl apply -f yamlfile.yml : To update the pods.
+kubectl delete pod/javaapp-pod : To delete the specific pod.
+
+SESSION 17:
+================
+To delete rc command is:
+	kubectl delete rc/myrc
+Once rc deleted inside pods also will get deleted.
+
+**** The disadvantage of RC is if any pod is deleted or any new pod created, communication can't be established by master why because 
+master already established communication through old ip address but master doesn't have that much of intelligence to pick up and establish
+connectivity. So for this issue the solution is: Labeling. Master identifies pods through labelling and pickup ip address and establish the connection *****
+
+Command to get only Endpoint is:
+    kubectl get ep
+	
+*** If you are not able to access application through any other node, then changes security group settings of that particular node by selecting particular node >>
+    go security groups >> 
+	
+Contents of javaAppService.yml file:
+=================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-app-svc
+  labels:
+    app: java-app
+spec:
+  type: NodePort
+  ports: 
+   - protocol: TCP
+     port: 8080
+     nodePort: 30001
+  selector:
+    app: java-app
+	
+After created service, on successfull creation we are able to access the applicaiton on any of the node.
+
+**** Very important thing is from service yml file the value at below two places,
+                    metadata >> labels >> app >> value	
+					         and
+					spec >> selector >> app >> value
+	 must match with value at below two places of replication controller yaml file.
+	 The places are:
+                   spec >> selector >> app >> value	
+                               and 
+                   template >> metadata >> labels >> app >> value
+
+     For example in above two files sampelJavaApp.yml (ReplicationController RC) and javaAppService.yml files,
+     the value is java-app must be matched at all places which are mentioned in the above. ******************
+	 
+SESSION 18:
+=================
+How to do the releases for deployments that is we are going to learn today.
+
+RC file with multiple labels:
+====================================
+FileName: java-app-rc.yml
+===============================
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: java-app-rc
+spec:
+  replicas: 4
+  selector:
+    app: java-app
+    version: 1.0.1
+  template:
+    metadata:
+      labels:
+        app: java-app
+        version: 1.0.1
+    spec:
+      containers:
+       - name: java-app-container
+         image: kirankumarmandarapu/app1_10_10_2026:5
+         ports:
+          - containerPort: 8080
+		  
+Now do the git push in local and git pull on master machine
+
+Now write service yml file.
+FileName: java-app-service.yml
+====================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-app-service
+  labels:
+    app: java-app
+    version: 1.0.2
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 30001 
+      protocol: TCP
+  selector: 
+    app: java-app
+    version: 1.0.2
+
+
+SESSION 19:
+===============
+Deployment is nothing but Replication Controller features along with deployment features.
+We call it from now onwards as ReplicaSet
+
+Roll Update:
+==============
+The process of upgrading pods with next image version is called Rollupdate.
+
+*** The advantage is at any cost anytime only desired state pods will get maintained.****
+
+Here for this we needs to write two files like service and deploy.
+
+The Ideal Service file looks like below.
+
+
+FileName: java-app-service.yml
+===================================
+Content:
+==========
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-app-service
+  labels:
+    app: java-app
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 30001 
+      protocol: TCP
+  selector: 
+    app: java-app
+	
+Deployment file looks like below.
+FileName: java-app-deploy.yml
+==============================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-app-deploy
+  labels:
+    app: java-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+	  app: java-app
+  template:
+    metadata:
+      labels:
+        app: java-app
+    spec:
+      containers:
+	   - name: java-app-container
+	     image: kirankumarmandarapu/app1_10_10_2026:1
+		 ports:
+		  - containerPort: 8000
+		  
+Deploy commands:
+========================
+kubectl apply -f deploy.yml --record
+kubectl rollout status deployments java-app-deploy
+kubectl get deploy java-app-deploy
+kubectl rollout history deployments java-app-deploy
+kubectl get rs
+kubectl describe rs
+kubectl describe deploy
+kubectl describe rc
+
+Undo Roll back commands:
+===========================
+kubectl describe deploy java-app-deploy
+kubectl rollout undo deployment java-app-deploy --to-revision=1
+kubectl get deploy
+kubectl rollout status deployments java-app-deploy
+kubectl rollout history deployments java-app-deploy
+        	  
+kubectl delete deploy/java-app-deploy
+
+
+***** For Springboot applications while running in localhost endpoints works fine due to embedded tomcat servers.
+     But while executing the same in kubernetes clusters that won't work and will get 404 error. To fix those errors we needs to do below changes into the files.
+	 
+	 Change 1:
+	 ===============
+	 File:SecondApplication.java
+	 
+	 Content:
+	 ==============
+	 package com.java.apps.secondapp;
+
+	import org.springframework.boot.SpringApplication;
+	import org.springframework.boot.autoconfigure.SpringBootApplication;
+	import org.springframework.boot.builder.SpringApplicationBuilder;
+	import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+
+	@SpringBootApplication
+	public class SecondappApplication extends SpringBootServletInitializer {
+
+	@Override
+		protected SpringApplicationBuilder configure(
+				SpringApplicationBuilder application) {
+			return application.sources(SecondappApplication.class);
+		}
+
+		public static void main(String[] args) {
+			SpringApplication.run(SecondappApplication.class, args);
+		}
+	}
+
+   Change 2:
+   =================
+   File:pom.xml
+
+   Content Change:
+   ====================
+   Add tomcat dependency
+
+   <dependency>
+     <groupId>org.springframework.boot</groupId>
+	 <artifactId>spring-boot-starter-tomcat</artifactId>
+	 <scope>provided</scope>
+   </dependency>   
+   
+   After deployed into the kubernetes and try to access the endpoint through urls like below.
+   
+   http://50.16.90.50:30002/secondapp3/api/welcome
+   
+   Here secondapp3 is the war file name. Through that only we are able to access it. *************
+
+
+SESSION 20:
+=====================
+Today we are going to discuss about how to create private repository image and handle it.
+
+Steps:
+================
+   1)Login into the AWS account
+   2)After logging in , create IAM user. To create IAM user follow below steps
+   3)IAM user creation steps:
+     ==========================
+		a)Search IAM users in search box.
+		b)Click on IAM users link on left side panel.
+		c)Click on Create user 
+		d)Give Username details. (Here I given kirankumarmandarapuiamuser as username) and click on next
+		e)Select Attach policies directly radio button
+		f)Select AdministratorAccess check box click on next
+		g)Click on Create user
+		h)On successfull IAM user creation we are able to see the user in users dashboard.
+		i)Now select the created IAM user and goto Security Credentials tab >> click on Create access key 
+		j)Now select the Command Line interface (CLI) radio button >> check the Confirmation check box. >> click on next
+		k)Now set the description tag value (I have provided as secondapp3cli)
+		l)Now we are able to see the Accesskey and Secret Access key values like below.
+		                Access key                     Secret access key
+                    "YOUR ACCESS KEY"                 " YOUR ACCESS SECRET KEY"
+	    m)Click on Done to complete the process.
+    4)Now connect to Docker host machine through Git Bash command and execute below command.
+        apt-get install awscli
+        ***** If any issue raised during the above process please take help from ChatGpt and complete the installation *****
+	5)Now execute below command
+	    aws configure
+		
+	6)Now it will prompt for below things
+	    AWS Access Key  : above 
+		AWS Secret Access Key: above
+		Default region name :us-east-1
+		Default output format : json
+		
+	7)On successfull execution we are able to see prompt.
+	8)Now we are able to execute any cli commands for example aws s3 ls etc.
+	9)We do create one application image and upload into docker hub incase of public repository (You can refer steps above for this)
+	  But now we are going to upload into private repository. (Please follow below steps)
+   10)Steps to create private repository.
+      a)Login into the AWS cloud.
+	  b)In search bar type ECR
+	  c)Click on Create
+	  d)Give application name here (**** Please note that the image we created in local the same name we must use here.******)
+	    In my case i have image name as secondapp3:1 so I have given application name as secondapp3
+	  e)Dont do any changes in further process, please leave it as it is and proceed and create repository.
+	  f)Click on view push commands button then the set of commands will be displayed.
+	  g)In my case I have got below commands.
+	    1)Retrieve an authentication token and authenticate your Docker client to your registry. Use the AWS CLI:
+			aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 745125233316.dkr.ecr.us-east-1.amazonaws.com
+		  Note: If you receive an error using the AWS CLI, make sure that you have the latest version of the AWS CLI and Docker installed.
+		
+		2)Build your Docker image using the following command. For information on building a Docker file from scratch see the instructions here . You can skip this step if your     image is already built:
+             docker build -t secondapp3 .
+			 
+        3)After the build completes, tag your image so you can push the image to this repository:
+             docker tag secondapp3:latest 745125233316.dkr.ecr.us-east-1.amazonaws.com/secondapp3:latest
+			 **** Here in place of latest we needs to use proper required tag. In may case it is 1 ******
+			 
+        4)Run the following command to push this image to your newly created AWS repository:
+             docker push 745125233316.dkr.ecr.us-east-1.amazonaws.com/secondapp3:latest
+        	 **** Here also same we needs to proper image tag in place of latest ******
+			 
+	  h)Now goto docker host machine through git bash in which we do have Dockerfile of required image. In my case I needs to go that docker host machine which contains
+        Dockerfile of secondapp3:1 image. And go to the location where Dockerfile present and proceed with below steps	  
+      i)type aws congiure and follow steps 6 mentioned above	
+      j)Now execute all commands mentioned in step g) one by one with required changes.
+      k)On successfull image we are able to see private image with command docker ps -a
+        In my case i am able to see the image below
+            745125233316.dkr.ecr.us-east-1.amazonaws.com/secondapp3:1 
+
+      l)Now we can make use this image in manifest deploy file.	
+	  m)Create namespace in docker host machine.
+	      kubectl create namespace production
+		  
+	  n)Create ecr-secret with below command.
+         kubectl create secret docker-registry ecr-secret --docker-server=745125233316.dkr.ecr.us-east-1.amazonaws.com --docker-username=AWS --docker-password="$(aws ecr get-login-password --region us-east-1)" -n production	
+        
+         Here docker server value should be match step 3) value.
+      o)We can verify whether able to access the endpoints or application or not through the below url in broser.
+        Ex:
+        ===
+           http://13.221.31.160:30003/secondapp3/api/hello
+           Here 13.221.31.160 is node public ip
+                30003 is the port
+                secondapp3 is the imagename
+                api/hello is the endpoint.				
+
+The updated deploy yaml and service yaml files are below.
+
+FileName: java-app-deploy.yml
+================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-app-deploy
+  namespace: production
+  labels:
+    app: java-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: java-app
+  template:
+    metadata:
+      labels:
+        app: java-app
+    spec:
+      imagePullSecrets:
+        - name: ecr-secret 
+      containers:
+       - name: java-app-container
+         image: 745125233316.dkr.ecr.us-east-1.amazonaws.com/secondapp3:2
+         imagePullPolicy: Always
+         ports:
+          - containerPort: 8080
+            
+            
+FileName: java-app-service.yml
+=================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-app-service
+  namespace: production
+  labels:
+    app: java-app
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30003 
+      protocol: TCP
+  selector: 
+    app: java-app
+
+SESSION 21:
+==================
+To check deploy, rs, pods and under a particular namespace(In our case it is production) add -n "namespace" at the end of the command
+Example:
+================
+	kubectl get pods -n production
+	
+Updated Deployment file:
+==============================
+Filename: java-app-deploy.yml
+=================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-app-deploy
+  namespace: production
+  labels:
+    app: java-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: java-app
+  template:
+    metadata:
+      labels:
+        app: java-app
+    spec:
+      imagePullSecrets:
+        - name: ecr-secret 
+      containers:
+       - name: java-app-container
+         image: 745125233316.dkr.ecr.us-east-1.amazonaws.com/secondapp3:7
+         imagePullPolicy: Always
+         ports:
+          - containerPort: 8080
+		  
+Updated Service file:
+========================
+FileName: java-app-servic.yml
+==============================
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-app-service
+  namespace: production
+  labels:
+    app: java-app
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30006 
+      protocol: TCP
+  selector: 
+    app: java-app
+	
+SESSION 22:
+==================
+Today we are going to discuss about Elastic Kubernetes Service (EKS):
+m7i-flex.large
+
+We needs to install eks cluster on our laptop.
+
+To install EKS on your laptop follow below steps:
+====================================================
+	1)Open windows power shell in administrator mode and enter below commands and press enter.
+	  $ErrorActionPreference = "Stop"; `
+      $installPath = "C:\Program Files\eksctl"; `
+      $zipPath = "$env:TEMP\eksctl_windows_amd64.zip"; `
+      Write-Host "📦 Downloading eksctl..." -ForegroundColor Cyan; `
+      Invoke-WebRequest -Uri "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_windows_amd64.zip" -OutFile $zipPath; `
+      Write-Host "📂 Extracting..."; `
+      Expand-Archive -Force $zipPath -DestinationPath $env:TEMP; `
+      New-Item -ItemType Directory -Force -Path $installPath | Out-Null; `
+      Move-Item -Force "$env:TEMP\eksctl.exe" "$installPath\eksctl.exe"; `
+      Unblock-File "$installPath\eksctl.exe"; `
+      $envPath = [Environment]::GetEnvironmentVariable("Path", "Machine"); `
+      if ($envPath -notlike "*$installPath*") { `
+         Write-Host "🔧 Adding eksctl to PATH..."; `
+         [Environment]::SetEnvironmentVariable("Path", "$envPath;$installPath", "Machine"); `
+         } `
+      Write-Host "✅ eksctl installed successfully! Please restart PowerShell, then run:" -ForegroundColor Green; `
+      Write-Host "   eksctl version"
+
+      ***** No needs to change anything in the above commands. Please type and execute as it is. *******
+	  
+	2)On successfull eks installation at the end one prompt will get displayed with message like 
+	  eks installation successfull, restart the powershell and execute eksctl version to check the version of installed eks.
+	  
+	3)Restart the powershell in administrator mode and type eksctl version.
+	  Now you are able to see installed eksctl version.
+	  In my case I have got below message.
+	  
+	  PS C:\windows\system32> eksctl version
+      0.231.0
+	  
+	4)Install chocolatey on laptop by following below steps.
+	  Steps:
+	  ========
+		1)On windows powershell exectue below commands one by one.
+		  Commands:
+		  ===========
+			1)Get-ExecutionPolicy
+			2)Set-ExecutionPolicy Bypass -Scope Process -Force
+			3)Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+			4)On successfull chocolatey installation please verify installation with below command execution.
+				choco --version
+			5)If installation is success then we are able to see the chocolatey version like below.
+				PS C:\windows\system32> choco --version
+				2.7.4
+	5)After successfull installation of chocolatey install awscli using chocolatey on system.
+			command is: choco install awscli -y
+	6)On successfull awscli installation, close and reopen the windows powershell in administrator mode.
+	7)We would like to configure awscli with IAM user access key and secret access key, which are created in above steps.
+	8)As I am creating for us-west-1 region created separate IAM user for this. Please find the IAM user details below.
+	  
+	     username: kirankumarmandarapuiamuseruswest1region
+		 accesskey:"Access Key"
+		 secret accesss key:"Access Secret Key"
+		 region: us-west-1
+		 output format: json
+		 selected description tag value while cli creation is: eksclusteruswest1regioncli
+		 
+	 9)Type aws configure and enter all details such as access key, secret access key, region and output format etc which are mentioned above.
+	 10)******In this process in powershell will get prompt like below.
+	    Configure AWS skills and AWS MCP server for your AI coding agent(s)? [y/n/never]:
+		As currently we are doing aws configuration on personal laptop it is fine. But the same configuration while doing on company laptop we must select no 
+		otherwise will face compliance violation issue. Be care full at that time.*****************
+	 11)On successfull aws cli installation you can verify the installation success or not with below command.
+	    aws sts get-caller-identity
+	 12)If installation success then output will be like below.
+	    PS C:\windows\system32> aws sts get-caller-identity
+		{
+			"UserId": "AIDA227HMYKSCL2QGDUYJ",
+			"Account": "745125233316",
+			"Arn": "arn:aws:iam::745125233316:user/kirankumarmandarapuiamuseruswest1region"
+		}
+	  13)Install kubectl on laptop with the help of chocolatey through below command.
+         choco install kubernetes-cli -y	  
+	  14)On successfull installation we are able to see below output.
+	     PS C:\windows\system32> choco install kubernetes-cli -y
+		Chocolatey v2.7.4
+        Installing the following packages:
+        kubernetes-cli
+        By installing, you accept licenses for the packages.
+        Downloading package from source 'https://community.chocolatey.org/api/v2/'
+        Progress: Downloading kubernetes-cli 1.37.1... 100%
+
+        kubernetes-cli v1.37.1 [Approved]
+        kubernetes-cli package files install completed. Performing other installation steps.
+        Extracting 64-bit C:\ProgramData\chocolatey\lib\kubernetes-cli\tools\kubernetes-client-windows-amd64.tar.gz to C:\ProgramData\chocolatey\lib\kubernetes-cli\tools...
+        C:\ProgramData\chocolatey\lib\kubernetes-cli\tools
+        Extracting 64-bit C:\ProgramData\chocolatey\lib\kubernetes-cli\tools\kubernetes-client-windows-amd64.tar to C:\ProgramData\chocolatey\lib\kubernetes-cli\tools...
+        C:\ProgramData\chocolatey\lib\kubernetes-cli\tools
+        ShimGen has successfully created a shim for kubectl-convert.exe
+        ShimGen has successfully created a shim for kubectl.exe
+        The install of kubernetes-cli was successful.
+        Deployed to 'C:\ProgramData\chocolatey\lib\kubernetes-cli\tools'
+
+        Chocolatey installed 1/1 packages.
+        See the log for details (C:\ProgramData\chocolatey\logs\chocolatey.log).
+
+      15)Verify installation with below command.
+	     kubectl
+		 
+		 On successfull installation we are able to see all the kubectl commands.
+		 
+	  16)Now create the cluster with below command.
+	     eksctl create cluster --name=observability1  --region=us-west-2 --zones=us-west-2a,us-west-2b --without-nodegroup
+		 In the above cluster name is: observability1
+		              region is: us-west-2
+					  
+	  17)On successfull execution will get the output like below. The process will takens around 10 minutes.
+	     PS C:\windows\system32> eksctl create cluster --name=observability1  --region=us-west-2 --zones=us-west-2a,us-west-2b --without-nodegroup
+			2026-10-23 19:19:58 [ℹ]  eksctl version 0.231.0
+			2026-10-23 19:19:58 [ℹ]  using region us-west-2
+			2026-10-23 19:19:58 [ℹ]  subnets for us-west-2a - public:192.168.0.0/19 private:192.168.64.0/19
+			2026-10-23 19:19:58 [ℹ]  subnets for us-west-2b - public:192.168.32.0/19 private:192.168.96.0/19
+			2026-10-23 19:19:58 [!]  Auto Mode will be enabled by default in an upcoming release of eksctl. This means managed node groups and managed networking add-ons will no longer be created by default. To maintain current behavior, explicitly set 'autoModeConfig.enabled: false' in your cluster configuration. Learn more: https://eksctl.io/usage/auto-mode/
+			2026-10-23 19:19:58 [ℹ]  using Kubernetes version 1.34
+			2026-10-23 19:19:58 [ℹ]  creating EKS cluster "observability1" in "us-west-2" region with
+			2026-10-23 19:19:58 [ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=us-west-2 --cluster=observability1'
+			2026-10-23 19:19:58 [ℹ]  Kubernetes API endpoint access will use default of {publicAccess=true, privateAccess=false} for cluster "observability1" in "us-west-2"
+			2026-10-23 19:19:58 [ℹ]  CloudWatch logging will not be enabled for cluster "observability1" in "us-west-2"
+			2026-10-23 19:19:58 [ℹ]  you can enable it with 'eksctl utils update-cluster-logging --enable-types={SPECIFY-YOUR-LOG-TYPES-HERE (e.g. all)} --region=us-west-2 --cluster=observability1'
+			2026-10-23 19:19:58 [ℹ]  default addons coredns, metrics-server, vpc-cni, kube-proxy were not specified, will install them as EKS addons
+			2026-10-23 19:19:58 [ℹ]
+			2 sequential tasks: { create cluster control plane "observability1",
+				2 sequential sub-tasks: {
+					1 task: { create addons },
+					wait for control plane to become ready,
+				}
+			}
+			2026-10-23 19:19:58 [ℹ]  building cluster stack "eksctl-observability1-cluster"
+			2026-10-23 19:19:59 [ℹ]  deploying stack "eksctl-observability1-cluster"
+			2026-10-23 19:20:29 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+			2026-10-23 19:21:00 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+			2026-10-23 19:22:00 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+			2026-10-23 19:23:01 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+			2026-10-23 19:24:02 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+			2026-10-23 19:25:03 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+			2026-10-23 19:26:03 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+			2026-10-23 19:27:04 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+			2026-10-23 19:28:05 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+			2026-10-23 19:29:06 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+			2026-10-23 19:29:10 [ℹ]  creating addon: coredns
+			2026-10-23 19:29:10 [ℹ]  successfully created addon: coredns
+			2026-10-23 19:29:11 [!]  recommended policies were found for "vpc-cni" addon, but since OIDC is disabled on the cluster, eksctl cannot configure the requested permissions; the recommended way to provide IAM permissions for "vpc-cni" addon is via pod identity associations; after addon creation is completed, add all recommended policies to the config file, under `addon.PodIdentityAssociations`, and run `eksctl update addon`
+			2026-10-23 19:29:11 [ℹ]  creating addon: vpc-cni
+			2026-10-23 19:29:12 [ℹ]  successfully created addon: vpc-cni
+			2026-10-23 19:29:13 [ℹ]  creating addon: kube-proxy
+			2026-10-23 19:29:13 [ℹ]  successfully created addon: kube-proxy
+			2026-10-23 19:31:17 [ℹ]  waiting for the control plane to become ready
+			2026-10-23 19:31:18 [✔]  saved kubeconfig as "C:\\Users\\KIRANKUMAR MANDARAPU\\.kube\\config"
+			2026-10-23 19:31:18 [ℹ]  no tasks
+			2026-10-23 19:31:18 [✔]  all EKS cluster resources for "observability1" have been created
+			2026-10-23 19:31:19 [ℹ]  creating addon: metrics-server
+			2026-10-23 19:31:19 [ℹ]  successfully created addon: metrics-server
+			2026-10-23 19:31:21 [ℹ]  kubectl command should work with "C:\\Users\\KIRANKUMAR MANDARAPU\\.kube\\config", try 'kubectl get nodes'
+			2026-10-23 19:31:21 [✔]  EKS cluster "observability1" in "us-west-2" region is ready
+			
+	  18)Now execute the below approve command.
+	     eksctl utils associate-iam-oidc-provider --region us-west-2 --cluster observability1 --approve
+		 
+	  19)On successfull completion of the above command we are able to see the below output in powershell
+	     PS C:\windows\system32> eksctl utils associate-iam-oidc-provider --region us-west-2 --cluster observability1 --approve
+			2026-10-23 19:34:54 [ℹ]  will create IAM Open ID Connect provider for cluster "observability1" in "us-west-2"
+			2026-10-23 19:34:55 [✔]  created IAM Open ID Connect provider for cluster "observability1" in "us-west-2"
+      20)On successfull completion of the above command we are able to see the below output in windows powershell
+	  PS C:\windows\system32> eksctl create nodegroup --cluster=observability1 --region=us-west-2   --name=observability1-ng-private                    --node-type=m7i-flex.large --nodes-min=2 --nodes-max=3 --node-volume-size=20 --managed --asg-access --external-dns-access --full-ecr-access --appmesh-access --alb-ingress-access --node-private-networking
+			2026-10-23 19:51:29 [ℹ]  will use version 1.34 for new nodegroup(s) based on control plane version
+			2026-10-23 19:51:35 [ℹ]  nodegroup "observability1-ng-private" will use "" [AmazonLinux2023/1.34]
+			2026-10-23 19:51:36 [ℹ]  1 nodegroup (observability1-ng-private) was included (based on the include/exclude rules)
+			2026-10-23 19:51:36 [ℹ]  will create a CloudFormation stack for each of 1 managed nodegroups in cluster "observability1"
+			2026-10-23 19:51:36 [ℹ]
+			2 sequential tasks: { fix cluster compatibility, 1 task: { 1 task: { create managed nodegroup "observability1-ng-private" } }
+			}
+			2026-10-23 19:51:36 [ℹ]  checking cluster stack for missing resources
+			2026-10-23 19:51:37 [ℹ]  cluster stack has all required resources
+			2026-10-23 19:51:38 [ℹ]  building managed nodegroup stack "eksctl-observability1-nodegroup-observability1-ng-private"
+			2026-10-23 19:51:39 [ℹ]  deploying stack "eksctl-observability1-nodegroup-observability1-ng-private"
+			2026-10-23 19:51:39 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-nodegroup-observability1-ng-private"
+			2026-10-23 19:52:10 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-nodegroup-observability1-ng-private"
+			2026-10-23 19:53:02 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-nodegroup-observability1-ng-private"
+			2026-10-23 19:53:38 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-nodegroup-observability1-ng-private"
+			2026-10-23 19:54:54 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-nodegroup-observability1-ng-private"
+			2026-10-23 19:54:55 [ℹ]  no tasks
+			2026-10-23 19:54:55 [✔]  created 0 nodegroup(s) in cluster "observability1"
+			2026-10-23 19:54:56 [ℹ]  nodegroup "observability1-ng-private" has 2 node(s)
+			2026-10-23 19:54:56 [ℹ]  node "ip-192-168-116-93.us-west-2.compute.internal" is ready
+			2026-10-23 19:54:56 [ℹ]  node "ip-192-168-71-110.us-west-2.compute.internal" is ready
+			2026-10-23 19:54:56 [ℹ]  waiting for at least 2 node(s) to become ready in "observability1-ng-private"
+			2026-10-23 19:54:56 [ℹ]  nodegroup "observability1-ng-private" has 2 node(s)
+			2026-10-23 19:54:56 [ℹ]  node "ip-192-168-116-93.us-west-2.compute.internal" is ready
+			2026-10-23 19:54:56 [ℹ]  node "ip-192-168-71-110.us-west-2.compute.internal" is ready
+			2026-10-23 19:54:56 [✔]  created 1 managed nodegroup(s) in cluster "observability1"
+			2026-10-23 19:54:57 [ℹ]  checking security group configuration for all nodegroups
+			2026-10-23 19:54:57 [ℹ]  all nodegroups have up-to-date cloudformation templates
+	  21)Now create the EKS cluster on windows with below command.
+	     eksctl create cluster   --name my-eks-cluster01  --full-ecr-access --alb-ingress-access  --version 1.30  --region us-west-1
+		 In the above command cluster name is: my-eks-cluster01
+		                            region is: us-west-1
+									
+	  22)So far we created two clusters observability1 for us-west-2 and
+	                                    my-eks-cluster01 for us-west-1 regions respectively.
+								 
+	  23)If we wants to delete clusters execute the below command.
+	     eksctl delete cluster --name my-eks-cluster01  --region us-east-1
+		 ***** cluster name and region should match. Be careful while executing the above command *********
+  
+
+
+
+
+
+	 
+
+ 
+
+	   
+	
+
+
+
+	  
+	  
+	  
+
+	
+
+
