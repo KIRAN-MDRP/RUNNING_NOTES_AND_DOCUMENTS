@@ -1,0 +1,7 @@
+Gen AI and Machine Learning Course Running Notes:
+======================================================
+SESSION 1: 2ND NOVEMBER 2026:
+================================
+Jupyter - This is the software used to write the Python code, debug it and share it.
+
+

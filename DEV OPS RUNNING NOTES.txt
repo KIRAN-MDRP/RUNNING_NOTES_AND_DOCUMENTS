@@ -1936,6 +1936,30 @@ To install EKS on your laptop follow below steps:
 	  23)If we wants to delete clusters execute the below command.
 	     eksctl delete cluster --name my-eks-cluster01  --region us-east-1
 		 ***** cluster name and region should match. Be careful while executing the above command *********
+		 
+SESSION 23:
+===================
+Helm Charts:
+-----------------
+By using helm charts with the single commmand we can handle multiple manifest files.
+It is a folder with fixed layout
+
+Defination:
+=====================
+It is a package manager for kubernetes which will guide, what to use and when to use.
+The disadvantage so far approach is once port is created, we can't reuse it. So helm chart resolves this issue as it creates as template and values can be changed.
+
+Helm Chart folder structure looks like below.
+
+appName
+	templates(folder)
+	Chart.yaml
+	values.yaml
+	values-dev.yaml
+	values-prod.yaml
+
+
+
   
 
 
