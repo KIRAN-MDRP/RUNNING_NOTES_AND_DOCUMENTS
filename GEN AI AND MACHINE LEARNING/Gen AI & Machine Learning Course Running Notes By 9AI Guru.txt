@@ -1,0 +1,20 @@
+Gen AI and Machine Learning Course Running Notes:
+======================================================
+SESSION 1: 2ND NOVEMBER 2026:
+================================
+Jupyter - This is the software used to write the Python code, debug it and share it.
+
+SESSION 2:
+===================
+Today we discussed about Number data type.
+In Number data type we have 4 sub categories like int, float, complex numbers, boolean etc.
+Exmaples:
+==============
+	a = 4 //int data type
+	b = 3.45 //float data type
+	c = 3+4J // complex data type.
+	d = True // boolean data type.
+	
+How to install Jupyter noteboook.
+It is one of the Python library which will be use ful for python programming.
+
