@@ -1895,7 +1895,10 @@ To install EKS on your laptop follow below steps:
 	     PS C:\windows\system32> eksctl utils associate-iam-oidc-provider --region us-west-2 --cluster observability1 --approve
 			2026-10-23 19:34:54 [ℹ]  will create IAM Open ID Connect provider for cluster "observability1" in "us-west-2"
 			2026-10-23 19:34:55 [✔]  created IAM Open ID Connect provider for cluster "observability1" in "us-west-2"
-      20)On successfull completion of the above command we are able to see the below output in windows powershell
+      20)Now execute the below command
+	     eksctl create nodegroup --cluster=observability1 --region=us-west-2   --name=observability1-ng-private                    --node-type=m7i-flex.large --nodes-min=2 --nodes-max=3 --node-volume-size=20 --managed --asg-access --external-dns-access --full-ecr-access --appmesh-access --alb-ingress-access --node-private-networking
+		 
+	  21)On successfull completion of the above command we are able to see the below output in windows powershell
 	  PS C:\windows\system32> eksctl create nodegroup --cluster=observability1 --region=us-west-2   --name=observability1-ng-private                    --node-type=m7i-flex.large --nodes-min=2 --nodes-max=3 --node-volume-size=20 --managed --asg-access --external-dns-access --full-ecr-access --appmesh-access --alb-ingress-access --node-private-networking
 			2026-10-23 19:51:29 [ℹ]  will use version 1.34 for new nodegroup(s) based on control plane version
 			2026-10-23 19:51:35 [ℹ]  nodegroup "observability1-ng-private" will use "" [AmazonLinux2023/1.34]
@@ -1925,15 +1928,10 @@ To install EKS on your laptop follow below steps:
 			2026-10-23 19:54:56 [✔]  created 1 managed nodegroup(s) in cluster "observability1"
 			2026-10-23 19:54:57 [ℹ]  checking security group configuration for all nodegroups
 			2026-10-23 19:54:57 [ℹ]  all nodegroups have up-to-date cloudformation templates
-	  21)Now create the EKS cluster on windows with below command.
-	     eksctl create cluster   --name my-eks-cluster01  --full-ecr-access --alb-ingress-access  --version 1.30  --region us-west-1
-		 In the above command cluster name is: my-eks-cluster01
-		                            region is: us-west-1
-									
-	  22)So far we created two clusters observability1 for us-west-2 and
-	                                    my-eks-cluster01 for us-west-1 regions respectively.
+	  21)So far we created two clusters observability1 for us-west-2
+	                                    
 								 
-	  23)If we wants to delete clusters execute the below command.
+	  22)If we wants to delete clusters execute the below command.
 	     eksctl delete cluster --name my-eks-cluster01  --region us-east-1
 		 ***** cluster name and region should match. Be careful while executing the above command *********
 		 
@@ -1941,22 +1939,903 @@ SESSION 23:
 ===================
 Helm Charts:
 -----------------
+Helm chart is the package manager for kubernetes which represents what it is, why we use it and how to use it.
 By using helm charts with the single commmand we can handle multiple manifest files.
 It is a folder with fixed layout
 
-Defination:
-=====================
-It is a package manager for kubernetes which will guide, what to use and when to use.
 The disadvantage so far approach is once port is created, we can't reuse it. So helm chart resolves this issue as it creates as template and values can be changed.
 
-Helm Chart folder structure looks like below.
+*** Helm chart bundles all yaml files (service.yaml, replicationset.yaml (rs), replicationcontroller(rc)) into one package called Chart. ****
+We execute one command that will deploy our app.
 
-appName
-	templates(folder)
-	Chart.yaml
-	values.yaml
-	values-dev.yaml
-	values-prod.yaml
+There are three important words we needs to understand associated with Helmcharts such as Chart, Release and Repository.
+
+Chart:
+=============
+It is a package which contains templates and default values.
+
+Release:
+==============
+It is running install of Chart with name and revision number.
+Examples are: student-app-prod 
+              student-app-dev
+
+Repository:
+=================
+A place to share and download charts which is nothing but a Docker hub for charts.
+
+**** Why we need Helmcharts?
+A)There are 6 reasons to use Helmcharts.
+	1)Package once and reuse it.
+	2)Configure per requirement
+	3)One command deploy
+	4)Upgrade and roll back
+	5)Ready made apps
+	6)Fewer mistakes
+
+
+Typical folder structure looks like below.
+
+Appname/
+	Chart.yaml - Contains Chart name, Chart version and App version
+	values.yaml - Contains default values. Any environment like dev or uat or prod can override them as per the requirement.
+	values-dev.yaml or values-prod.yaml - Our own environment values will be override default values.
+	templates/ - Kubernetes yaml with place holders
+		_helpers.tpl - Reusable snippets such as names and labels
+		deployment.yaml 
+		service.yaml
+		NOTES.txt - Helm prints after install.
+		
+Steps to install Helm on Windows:
+=====================================
+	1)Open the Powershell in adiminstrator mode and execute the below command. Provided that choco installed on Windows machine.
+		choco install kubernetes-helm 
+	2)Verify installation success or not with the below command.
+		helm version
+	3)If installation success then we are able to see below message.
+		PS C:\windows\system32> helm version
+		version.BuildInfo{Version:"v4.1.4", GitCommit:"05fa37973dc9e42b76e1d2883494c87174b6074f", GitTreeState:"clean", GoVersion:"go1.25.9", KubeClientVersion:"v1.35"}
+		
+To use ready-made chart from repository please follow the below steps:
+============================================================================
+	**** Pre requisite for this step is we must execute aws configure command for the required region and create eks cluster in that region and context 
+	should be existed on windows machine. We can refer above for the cluster creation.*****
+	
+	1)Add the repo with below command.
+		helm repo add bitnami https://charts.bitnami.com/bitnami
+	2)Refresh the list with below command
+		helm repo update
+	3)Search for a chart
+		helm search repo nginx
+	4)See its settings
+		helm show values bitnami/nginx
+	5)Install it
+	    helm install web bitnami/nginx --set service.type=NodePort
+	6)Check and remove with below commands respectively
+		helm list
+		helm uninstall web
+		
+To use our own app chart please follow below steps:
+==========================================================
+	1)Open VS code terminal and go to any location and create folder with name helm.
+	2)Go to that created folder in VS code terminal and execute below command.
+		helm create java-app
+	3)commit and push changes into the respective git repository.
+	4)To see the source of all files environment wise please use the below command.
+	  The below command wont do the deployment it will show the current file source code.
+      ***** If we wants to switch deployment from one environment to another environment then we will use the below command************	
+	  
+	  helm template app-prod ./java-app -f java-app/values-prod.yaml // This is for prod environment
+	  helm template app-dev ./java-app -f java-app/values-dev.yaml  // This is for dev environment
+	  
+	  Output:
+	  ========
+	  # Source: java-app/templates/service.yaml
+		apiVersion: v1
+		kind: Service
+		metadata:
+		  name: app-dev-java-app
+		  labels:
+			helm.sh/chart: java-app-0.1.0
+			app.kubernetes.io/name: java-app
+			app.kubernetes.io/instance: app-dev
+			app.kubernetes.io/version: "1.16.0"
+			app.kubernetes.io/managed-by: Helm
+		spec:
+		  type: NodePort
+		  ports:
+			- port: 8080
+			  targetPort: http
+			  protocol: TCP
+			  name: http
+		  selector:
+			app.kubernetes.io/name: java-app
+			app.kubernetes.io/instance: app-dev
+		---
+		# Source: java-app/templates/deployment.yaml
+		apiVersion: apps/v1
+		kind: Deployment
+		metadata:
+		  name: app-dev-java-app
+		  labels:
+			helm.sh/chart: java-app-0.1.0
+			app.kubernetes.io/name: java-app
+			app.kubernetes.io/instance: app-dev
+			app.kubernetes.io/version: "1.16.0"
+			app.kubernetes.io/managed-by: Helm
+		spec:
+		  replicas: 2
+		  selector:
+			matchLabels:
+			  app.kubernetes.io/name: java-app
+			  app.kubernetes.io/instance: app-dev
+		  template:
+			metadata:
+			  labels:
+				helm.sh/chart: java-app-0.1.0
+				app.kubernetes.io/name: java-app
+				app.kubernetes.io/instance: app-dev
+				app.kubernetes.io/version: "1.16.0"
+				app.kubernetes.io/managed-by: Helm
+			spec:
+			  imagePullSecrets:
+				- name: ecr-secret
+			  containers:
+				- name: java-app
+				  image: "745125233316.dkr.ecr.us-east-1.amazonaws.com/secondapp3:7"
+				  imagePullPolicy: IfNotPresent
+				  ports:
+					- name: http
+					  containerPort: 8080
+					  protocol: TCP
+		---
+		# Source: java-app/templates/tests/test-connection.yaml
+		apiVersion: v1
+		kind: Pod
+		metadata:
+		  name: "app-dev-java-app-test-connection"
+		  labels:
+			helm.sh/chart: java-app-0.1.0
+			app.kubernetes.io/name: java-app
+			app.kubernetes.io/instance: app-dev
+			app.kubernetes.io/version: "1.16.0"
+			app.kubernetes.io/managed-by: Helm
+		  annotations:
+			"helm.sh/hook": test
+		spec:
+		  containers:
+			- name: wget
+			  image: busybox
+			  command: ['wget']
+			  args: ['app-dev-java-app:8080']
+		  restartPolicy: Never
+	4)From terminal create java-app chart with below commmand
+		helm lint ./java-app
+	5)Now create namespace like default-namespace with below command
+	    kubectl create namespace default-namespace
+	6)Now execute below command under default-namespace
+		helm install app-default ./java-app -f java-app/values.yaml -n default-namespace
+	7)On successfull execution we are able to see the information like below.
+	  E:\LEARNINGS\DURGASOFT\AWS\manifest_14_OCT_2026\helm>helm install app-default ./java-app -f java-app/values.yaml -n default-namespace
+		NAME: app-default
+		LAST DEPLOYED: Wed Nov  4 23:11:43 2026
+		NAMESPACE: default-namespace
+		STATUS: deployed
+		REVISION: 1
+		DESCRIPTION: Install complete
+		NOTES:
+		
+	8)To get full information about this chart execute below command
+		helm template ./java-app
+	9)Then we are able to see the below content
+		E:\LEARNINGS\DURGASOFT\AWS\manifest_14_OCT_2026\helm>helm template ./java-app
+		# Source: java-app/templates/service.yaml
+		apiVersion: v1
+		kind: Service
+		metadata:
+		  name: release-name-java-app
+		  labels:
+			helm.sh/chart: java-app-0.1.0
+			app.kubernetes.io/name: java-app
+			app.kubernetes.io/instance: release-name
+			app.kubernetes.io/version: "1.16.0"
+			app.kubernetes.io/managed-by: Helm
+		spec:
+		  type: NodePort
+		  ports:
+			- port: 8080
+			  targetPort: http
+			  protocol: TCP
+			  name: http
+		  selector:
+			app.kubernetes.io/name: java-app
+			app.kubernetes.io/instance: release-name
+		---
+		# Source: java-app/templates/deployment.yaml
+		apiVersion: apps/v1
+		kind: Deployment
+		metadata:
+		  name: release-name-java-app
+		  labels:
+			helm.sh/chart: java-app-0.1.0
+			app.kubernetes.io/name: java-app
+			app.kubernetes.io/instance: release-name
+			app.kubernetes.io/version: "1.16.0"
+			app.kubernetes.io/managed-by: Helm
+		spec:
+		  replicas: 1
+		  selector:
+			matchLabels:
+			  app.kubernetes.io/name: java-app
+			  app.kubernetes.io/instance: release-name
+		  template:
+			metadata:
+			  labels:
+				helm.sh/chart: java-app-0.1.0
+				app.kubernetes.io/name: java-app
+				app.kubernetes.io/instance: release-name
+				app.kubernetes.io/version: "1.16.0"
+				app.kubernetes.io/managed-by: Helm
+			spec:
+			  containers:
+				- name: java-app
+				  image: "745125233316.dkr.ecr.us-east-1.amazonaws.com/secondapp3:7"
+				  imagePullPolicy: IfNotPresent
+				  ports:
+					- name: http
+					  containerPort: 8080
+					  protocol: TCP
+		---
+		# Source: java-app/templates/tests/test-connection.yaml
+		apiVersion: v1
+		kind: Pod
+		metadata:
+		  name: "release-name-java-app-test-connection"
+		  labels:
+			helm.sh/chart: java-app-0.1.0
+			app.kubernetes.io/name: java-app
+			app.kubernetes.io/instance: release-name
+			app.kubernetes.io/version: "1.16.0"
+			app.kubernetes.io/managed-by: Helm
+		  annotations:
+			"helm.sh/hook": test
+		spec:
+		  containers:
+			- name: wget
+			  image: busybox
+			  command: ['wget']
+			  args: ['release-name-java-app:8080']
+		  restartPolicy: Never
+		  
+	10)Now upgrade pods from 1 to 4 with below command.
+		helm upgrade app-default ./java-app -f java-app/values.yaml --set replicaCount=4 -n default-namespace
+		Output:
+		=============
+		Release "app-default" has been upgraded. Happy Helming!
+		NAME: app-default
+		LAST DEPLOYED: Fri Nov  6 23:41:36 2026
+		NAMESPACE: default-namespace
+		STATUS: deployed
+		REVISION: 2
+		DESCRIPTION: Upgrade complete
+		NOTES:
+	11)Now we are able to see the replicas count increased to 4
+	   kubectl get all -n default-namespace
+	   Output:
+	   ==========
+		NAME                                       READY   STATUS    RESTARTS   AGE
+		pod/app-default-java-app-ccfd8c784-bzqnq   1/1     Running   0          96s
+		pod/app-default-java-app-ccfd8c784-dfsgt   1/1     Running   0          96s
+		pod/app-default-java-app-ccfd8c784-m7rps   1/1     Running   0          33m
+		pod/app-default-java-app-ccfd8c784-w25vm   1/1     Running   0          96s
+
+		NAME                           TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+		service/app-default-java-app   NodePort   10.100.78.189   <none>        8080:30859/TCP   33m
+
+		NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE
+		deployment.apps/app-default-java-app   4/4     4            4           33m
+
+		NAME                                             DESIRED   CURRENT   READY   AGE
+		replicaset.apps/app-default-java-app-ccfd8c784   4         4         4       33m
+	12)In the above command app-default is the release value.
+	13)Now do the port forward using the below command.
+	   kubectl port-forward svc/app-default-java-app 18080:8080 -n default-namespace
+	   
+	   Output:
+	   ===========
+		Forwarding from 127.0.0.1:18080 -> 8080
+		Forwarding from [::1]:18080 -> 8080
+		Handling connection for 18080
+		Handling connection for 18080
+
+    14)Check we are able to access the application or not with below url.
+       **** Note that application is running on port 8080 now we have done port forwarding using the above command.****
+
+       http://127.0.0.1:18080/secondapp3/api/welcome
+
+    15)On successfull execution we are able to see the output. I mean web page.
+    16)Now check the below commands:
+	   We have done one upgrade so far.
+	   
+	   helm history app-default -n default-namespace
+	   
+	   Output:
+	   ========
+		REVISION        UPDATED                         STATUS          CHART           APP VERSION     DESCRIPTION     
+		1               Fri Nov  6 23:10:30 2026        superseded      java-app-0.1.0  1.16.0          Install complete
+		2               Fri Nov  6 23:41:36 2026        deployed        java-app-0.1.0  1.16.0          Upgrade complete
+	   
+	   helm rollback app-default -n default-namespace
+	   
+	   Output:
+	   =========
+	   Rollback was a success! Happy Helming!
+	   
+	   
+	   helm history app-default -n default-namespace
+	   
+	   Output:
+	   =========
+			   REVISION        UPDATED                         STATUS          CHART           APP VERSION     DESCRIPTION     
+		1               Fri Nov  6 23:10:30 2026        superseded      java-app-0.1.0  1.16.0          Install complete
+		2               Fri Nov  6 23:41:36 2026        superseded      java-app-0.1.0  1.16.0          Upgrade complete
+		3               Fri Nov  6 23:51:25 2026        deployed        java-app-0.1.0  1.16.0          Rollback to 1  
+		
+SESSION 24:
+====================
+	**** CloudFormation is the area where we can track status of cluster creation and deletion. If not deleted or created successfully from command then we can update here*****
+We learn about load balancer 
+    1)Execute aws configure command and enter required secret and access key values
+	2)Execute the below command in windows powershell with adiministrator previleges at C:\windows\system32 location.
+	  eksctl create cluster --name=observability1  --region=us-west-2 --zones=us-west-2a,us-west-2b --without-nodegroup
+	  
+	  output:
+	  ===========
+	    2026-11-07 14:02:14 [ℹ]  eksctl version 0.231.0
+		2026-11-07 14:02:14 [ℹ]  using region us-west-2
+		2026-11-07 14:02:14 [ℹ]  subnets for us-west-2a - public:192.168.0.0/19 private:192.168.64.0/19
+		2026-11-07 14:02:14 [ℹ]  subnets for us-west-2b - public:192.168.32.0/19 private:192.168.96.0/19
+		2026-11-07 14:02:14 [!]  Auto Mode will be enabled by default in an upcoming release of eksctl. This means managed node groups and managed networking add-ons will no longer be created by default. To maintain current behavior, explicitly set 'autoModeConfig.enabled: false' in your cluster configuration. Learn more: https://eksctl.io/usage/auto-mode/
+		2026-11-07 14:02:14 [ℹ]  using Kubernetes version 1.34
+		2026-11-07 14:02:14 [ℹ]  creating EKS cluster "observability1" in "us-west-2" region with
+		2026-11-07 14:02:14 [ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=us-west-2 --cluster=observability1'
+		2026-11-07 14:02:14 [ℹ]  Kubernetes API endpoint access will use default of {publicAccess=true, privateAccess=false} for cluster "observability1" in "us-west-2"
+		2026-11-07 14:02:14 [ℹ]  CloudWatch logging will not be enabled for cluster "observability1" in "us-west-2"
+		2026-11-07 14:02:14 [ℹ]  you can enable it with 'eksctl utils update-cluster-logging --enable-types={SPECIFY-YOUR-LOG-TYPES-HERE (e.g. all)} --region=us-west-2 --cluster=observability1'
+		2026-11-07 14:02:14 [ℹ]  default addons vpc-cni, kube-proxy, coredns, metrics-server were not specified, will install them as EKS addons
+		2026-11-07 14:02:14 [ℹ]
+		2 sequential tasks: { create cluster control plane "observability1",
+			2 sequential sub-tasks: {
+				1 task: { create addons },
+				wait for control plane to become ready,
+			}
+		}
+		2026-11-07 14:02:14 [ℹ]  building cluster stack "eksctl-observability1-cluster"
+		2026-11-07 14:02:15 [ℹ]  deploying stack "eksctl-observability1-cluster"
+		2026-11-07 14:02:45 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+		2026-11-07 14:03:16 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+		2026-11-07 14:04:17 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+		2026-11-07 14:05:18 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+		2026-11-07 14:06:19 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+		2026-11-07 14:07:19 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+		2026-11-07 14:08:20 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+		2026-11-07 14:09:21 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+		2026-11-07 14:10:22 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+		2026-11-07 14:11:23 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+		2026-11-07 14:12:24 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-cluster"
+		2026-11-07 14:12:29 [!]  recommended policies were found for "vpc-cni" addon, but since OIDC is disabled on the cluster, eksctl cannot configure the requested permissions; the recommended way to provide IAM permissions for "vpc-cni" addon is via pod identity associations; after addon creation is completed, add all recommended policies to the config file, under `addon.PodIdentityAssociations`, and run `eksctl update addon`
+		2026-11-07 14:12:29 [ℹ]  creating addon: vpc-cni
+		2026-11-07 14:12:29 [ℹ]  successfully created addon: vpc-cni
+		2026-11-07 14:12:30 [ℹ]  creating addon: kube-proxy
+		2026-11-07 14:12:31 [ℹ]  successfully created addon: kube-proxy
+		2026-11-07 14:12:31 [ℹ]  creating addon: coredns
+		2026-11-07 14:12:32 [ℹ]  successfully created addon: coredns
+		2026-11-07 14:14:36 [ℹ]  waiting for the control plane to become ready
+		2026-11-07 14:14:37 [✔]  saved kubeconfig as "C:\\Users\\KIRANKUMAR MANDARAPU\\.kube\\config"
+		2026-11-07 14:14:37 [ℹ]  no tasks
+		2026-11-07 14:14:37 [✔]  all EKS cluster resources for "observability1" have been created
+		2026-11-07 14:14:37 [ℹ]  creating addon: metrics-server
+		2026-11-07 14:14:38 [ℹ]  successfully created addon: metrics-server
+		2026-11-07 14:14:41 [ℹ]  kubectl command should work with "C:\\Users\\KIRANKUMAR MANDARAPU\\.kube\\config", try 'kubectl get nodes'
+		2026-11-07 14:14:41 [✔]  EKS cluster "observability1" in "us-west-2" region is ready
+		
+	3)Execute the below command
+		eksctl utils associate-iam-oidc-provider --region us-west-2 --cluster observability1 --approve
+		
+		Output:
+		============
+		2026-11-07 14:38:57 [ℹ]  will create IAM Open ID Connect provider for cluster "observability1" in "us-west-2"
+		2026-11-07 14:38:58 [✔]  created IAM Open ID Connect provider for cluster "observability1" in "us-west-2"
+		
+	4)Execute the below command
+	    eksctl create nodegroup --cluster=observability1 --region=us-west-2   --name=observability1-ng-private                    --node-type=m7i-flex.large --nodes-min=2 --nodes-max=3 --node-volume-size=20 --managed --asg-access --external-dns-access --full-ecr-access --appmesh-access --alb-ingress-access --node-private-networking
+	
+		Output:
+		===========
+		2026-11-07 14:39:59 [ℹ]  will use version 1.34 for new nodegroup(s) based on control plane version
+		2026-11-07 14:40:05 [ℹ]  nodegroup "observability1-ng-private" will use "" [AmazonLinux2023/1.34]
+		2026-11-07 14:40:07 [ℹ]  1 nodegroup (observability1-ng-private) was included (based on the include/exclude rules)
+		2026-11-07 14:40:07 [ℹ]  will create a CloudFormation stack for each of 1 managed nodegroups in cluster "observability1"
+		2026-11-07 14:40:07 [ℹ]
+		2 sequential tasks: { fix cluster compatibility, 1 task: { 1 task: { create managed nodegroup "observability1-ng-private" } }
+		}
+		2026-11-07 14:40:07 [ℹ]  checking cluster stack for missing resources
+		2026-11-07 14:40:08 [ℹ]  cluster stack has all required resources
+		2026-11-07 14:40:09 [ℹ]  building managed nodegroup stack "eksctl-observability1-nodegroup-observability1-ng-private"
+		2026-11-07 14:40:10 [ℹ]  deploying stack "eksctl-observability1-nodegroup-observability1-ng-private"
+		2026-11-07 14:40:10 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-nodegroup-observability1-ng-private"
+		2026-11-07 14:40:41 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-nodegroup-observability1-ng-private"
+		2026-11-07 14:41:37 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-nodegroup-observability1-ng-private"
+		2026-11-07 14:43:00 [ℹ]  waiting for CloudFormation stack "eksctl-observability1-nodegroup-observability1-ng-private"
+		2026-11-07 14:43:00 [ℹ]  no tasks
+		2026-11-07 14:43:00 [✔]  created 0 nodegroup(s) in cluster "observability1"
+		2026-11-07 14:43:01 [ℹ]  nodegroup "observability1-ng-private" has 2 node(s)
+		2026-11-07 14:43:01 [ℹ]  node "ip-192-168-124-140.us-west-2.compute.internal" is ready
+		2026-11-07 14:43:01 [ℹ]  node "ip-192-168-67-88.us-west-2.compute.internal" is ready
+		2026-11-07 14:43:01 [ℹ]  waiting for at least 2 node(s) to become ready in "observability1-ng-private"
+		2026-11-07 14:43:02 [ℹ]  nodegroup "observability1-ng-private" has 2 node(s)
+		2026-11-07 14:43:02 [ℹ]  node "ip-192-168-124-140.us-west-2.compute.internal" is ready
+		2026-11-07 14:43:02 [ℹ]  node "ip-192-168-67-88.us-west-2.compute.internal" is ready
+		2026-11-07 14:43:02 [✔]  created 1 managed nodegroup(s) in cluster "observability1"
+		2026-11-07 14:43:03 [ℹ]  checking security group configuration for all nodegroups
+		2026-11-07 14:43:03 [ℹ]  all nodegroups have up-to-date cloudformation templates
+		
+	  5)So far we do have values.yaml and values-dev.yaml files under template folder. Now create another file with name called values-prod.yaml
+	    and the file content looks like below.
+		Filename: 
+		==========
+		values-prod.yaml
+		
+		Contents:
+		===========
+		# Default values for java-app.
+		# This is a YAML-formatted file.
+		# Declare variables to be passed into your templates.
+
+		# This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
+		replicaCount: 9
+
+		imagePullSecrets: 
+			- name : ecr-secret
+
+		# This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
+		service:
+		  # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+		  type: LoadBalancer
+		  # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
+		  nodePort: null
+		  
+	 6)Open the VS code terminal and go to the chart present location till helm
+	    In my case i do have helm folder in below location.
+		E:\LEARNINGS\DURGASOFT\AWS\manifest_14_OCT_2026\helm>
+		
+	 7)Execute the command to create namespace called prod
+	    kubectl create namespace prod
+		
+		Output:
+		=========
+		namespace/prod created
+		
+	 8)Check whether there are any pods are running under prod namespace with below command
+	    kubectl get pods -n prod
+		
+		Output:
+		===========
+		No resources found in prod namespace.
+		
+	 9)Check whether any service is running under prod namespace with below command
+	    kubectl get svc -n prod
+		
+		Output:
+		===========
+		No resources found in prod namespace.
+		
+	10)Check whether any endpoints are existing under prod namespace with below command.
+	    kubectl get ep -n prod
+		
+		Output:
+		============
+		Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+		No resources found in prod namespace.
+		
+	11)As already chart is existing for java-app so we needs to execute below commands one by one.
+       Chart for java-app is created earlier and executed for value.yaml and upgraded to value-dev.yaml files. 
+       On top of it now we are going to execute commands for value-prod.yaml files under prod namespace.
+
+    12)Now execute the below command
+	   helm template app-prod ./java-app -f java-app/values-prod.yaml -n prod
+	   
+	   Output:
+	   ============
+	   ---
+		# Source: java-app/templates/service.yaml
+		apiVersion: v1
+		kind: Service
+		metadata:
+		  name: app-prod-java-app
+		  labels:
+			helm.sh/chart: java-app-0.1.0
+			app.kubernetes.io/name: java-app
+			app.kubernetes.io/instance: app-prod
+			app.kubernetes.io/version: "1.16.0"
+			app.kubernetes.io/managed-by: Helm
+		spec:
+		  type: LoadBalancer
+		  ports:
+			- port: 8080
+			  targetPort: http
+			  protocol: TCP
+			  name: http
+		  selector:
+			app.kubernetes.io/name: java-app
+			app.kubernetes.io/instance: app-prod
+		---
+		# Source: java-app/templates/deployment.yaml
+		apiVersion: apps/v1
+		kind: Deployment
+		metadata:
+		  name: app-prod-java-app
+		  labels:
+			helm.sh/chart: java-app-0.1.0
+			app.kubernetes.io/name: java-app
+			app.kubernetes.io/instance: app-prod
+			app.kubernetes.io/version: "1.16.0"
+			app.kubernetes.io/managed-by: Helm
+		spec:
+		  replicas: 9
+		  selector:
+			matchLabels:
+			  app.kubernetes.io/name: java-app
+			  app.kubernetes.io/instance: app-prod
+		  template:
+			metadata:
+			  labels:
+				helm.sh/chart: java-app-0.1.0
+				app.kubernetes.io/name: java-app
+				app.kubernetes.io/instance: app-prod
+				app.kubernetes.io/version: "1.16.0"
+				app.kubernetes.io/managed-by: Helm
+			spec:
+			  imagePullSecrets:
+				- name: ecr-secret
+			  containers:
+				- name: java-app
+				  image: "745125233316.dkr.ecr.us-east-1.amazonaws.com/secondapp3:7"
+				  imagePullPolicy: IfNotPresent
+				  ports:
+					- name: http
+					  containerPort: 8080
+					  protocol: TCP
+		---
+		# Source: java-app/templates/tests/test-connection.yaml
+		apiVersion: v1
+		kind: Pod
+		metadata:
+		  name: "app-prod-java-app-test-connection"
+		  labels:
+			helm.sh/chart: java-app-0.1.0
+			app.kubernetes.io/name: java-app
+			app.kubernetes.io/instance: app-prod
+			app.kubernetes.io/version: "1.16.0"
+			app.kubernetes.io/managed-by: Helm
+		  annotations:
+			"helm.sh/hook": test
+		spec:
+		  containers:
+			- name: wget
+			  image: busybox
+			  command: ['wget']
+			  args: ['app-prod-java-app:8080']
+		  restartPolicy: Never
+		  
+	 13)Now execute the below command
+	    helm lint ./java-app
+		
+		Output:
+		===========
+		==> Linting ./java-app
+		[INFO] Chart.yaml: icon is recommended
+
+		1 chart(s) linted, 0 chart(s) failed
+       	
+	 14)Now execute the below command
+	    helm install app-prod ./java-app -f java-app/values-prod.yaml -n prod
+		
+		Output:
+		==========
+		NAME: app-prod
+		LAST DEPLOYED: Sat Nov  7 22:06:58 2026
+		NAMESPACE: prod
+		STATUS: deployed
+		REVISION: 1
+		DESCRIPTION: Install complete
+		NOTES:
+	
+	15)Now execute the below command
+	   helm template ./java-app
+	   
+	   Output:
+	   ==========
+	   ---
+		# Source: java-app/templates/service.yaml
+		apiVersion: v1
+		kind: Service
+		metadata:
+		  name: release-name-java-app
+		  labels:
+			helm.sh/chart: java-app-0.1.0
+			app.kubernetes.io/name: java-app
+			app.kubernetes.io/instance: release-name
+			app.kubernetes.io/version: "1.16.0"
+			app.kubernetes.io/managed-by: Helm
+		spec:
+		  type: NodePort
+		  ports:
+			- port: 8080
+			  targetPort: http
+			  protocol: TCP
+			  name: http
+		  selector:
+			app.kubernetes.io/name: java-app
+			app.kubernetes.io/instance: release-name
+		---
+		# Source: java-app/templates/deployment.yaml
+		apiVersion: apps/v1
+		kind: Deployment
+		metadata:
+		  name: release-name-java-app
+		  labels:
+			helm.sh/chart: java-app-0.1.0
+			app.kubernetes.io/name: java-app
+			app.kubernetes.io/instance: release-name
+			app.kubernetes.io/version: "1.16.0"
+			app.kubernetes.io/managed-by: Helm
+		spec:
+		  replicas: 1
+		  selector:
+			matchLabels:
+			  app.kubernetes.io/name: java-app
+			  app.kubernetes.io/instance: release-name
+		  template:
+			metadata:
+			  labels:
+				helm.sh/chart: java-app-0.1.0
+				app.kubernetes.io/name: java-app
+				app.kubernetes.io/instance: release-name
+				app.kubernetes.io/version: "1.16.0"
+				app.kubernetes.io/managed-by: Helm
+			spec:
+			  containers:
+				- name: java-app
+				  image: "745125233316.dkr.ecr.us-east-1.amazonaws.com/secondapp3:7"
+				  imagePullPolicy: IfNotPresent
+				  ports:
+					- name: http
+					  containerPort: 8080
+					  protocol: TCP
+		---
+		# Source: java-app/templates/tests/test-connection.yaml
+		apiVersion: v1
+		kind: Pod
+		metadata:
+		  name: "release-name-java-app-test-connection"
+		  labels:
+			helm.sh/chart: java-app-0.1.0
+			app.kubernetes.io/name: java-app
+			app.kubernetes.io/instance: release-name
+			app.kubernetes.io/version: "1.16.0"
+			app.kubernetes.io/managed-by: Helm
+		  annotations:
+			"helm.sh/hook": test
+		spec:
+		  containers:
+			- name: wget
+			  image: busybox
+			  command: ['wget']
+			  args: ['release-name-java-app:8080']
+		  restartPolicy: Never
+		  
+		  
+	16)Now execute the below command
+	   kubectl get all -n prod 
+	   
+	   Output:
+	   ===========
+	   NAME                                     READY   STATUS    RESTARTS   AGE
+		pod/app-prod-java-app-567d84c8cb-6f8wp   1/1     Running   0          4m4s
+		pod/app-prod-java-app-567d84c8cb-bwqr4   1/1     Running   0          4m4s
+		pod/app-prod-java-app-567d84c8cb-f6jf5   1/1     Running   0          4m4s
+		pod/app-prod-java-app-567d84c8cb-ggzt7   1/1     Running   0          4m4s
+		pod/app-prod-java-app-567d84c8cb-mf6kg   1/1     Running   0          4m4s
+		pod/app-prod-java-app-567d84c8cb-p2tln   1/1     Running   0          4m4s
+		pod/app-prod-java-app-567d84c8cb-q6gs4   1/1     Running   0          4m4s
+		pod/app-prod-java-app-567d84c8cb-vzkm5   1/1     Running   0          4m4s
+		pod/app-prod-java-app-567d84c8cb-zlh89   1/1     Running   0          4m4s
+
+		NAME                        TYPE           CLUSTER-IP      EXTERNAL-IP                                                               PORT(S)          AGE
+		service/app-prod-java-app   LoadBalancer   10.100.171.18   afe9d3d6f22484020a90279c9176aee8-2045129994.us-west-2.elb.amazonaws.com   8080:31591/TCP   4m6s
+
+		NAME                                READY   UP-TO-DATE   AVAILABLE   AGE
+		deployment.apps/app-prod-java-app   9/9     9            9           4m5s
+
+		NAME                                           DESIRED   CURRENT   READY   AGE
+		replicaset.apps/app-prod-java-app-567d84c8cb   9         9         9       4m5s
+		
+	17)In the above output EXTERNAL-IP value s the part of the url through which we can access the application.
+	   Now check whether you are able to access the application through below url or not.
+	   
+	   http://afe9d3d6f22484020a90279c9176aee8-2045129994.us-west-2.elb.amazonaws.com:8080/secondapp3/api/welcome
+	   
+	18)If you are able to access the application then the process of load balancer creation is successfull.
+	19)To see the load balancer in AWS portal follow below steps.
+	20)On log on go to EC2 >> Load Balancing >> Load Balancers 
+	   There we are able to see this load balancer(afe9d3d6f22484020a90279c9176aee8-2045129994.us-west-2.elb.amazonaws.com).
+	   
+	21)To inspect the release execute the below command
+	   Command 1:
+	   =============
+	   helm status app-prod -n prod
+	   
+	   Output:
+	   ============
+	   NAME: app-prod
+		LAST DEPLOYED: Sat Nov  7 22:06:58 2026
+		NAMESPACE: prod
+		STATUS: deployed
+		REVISION: 1
+		DESCRIPTION: Install complete
+		RESOURCES:
+		==> v1/Pod(related)
+		NAME                                 READY   STATUS    RESTARTS   AGE
+		app-prod-java-app-567d84c8cb-6f8wp   1/1     Running   0          85m
+		app-prod-java-app-567d84c8cb-bwqr4   1/1     Running   0          85m
+		app-prod-java-app-567d84c8cb-f6jf5   1/1     Running   0          85m
+		app-prod-java-app-567d84c8cb-ggzt7   1/1     Running   0          85m
+		app-prod-java-app-567d84c8cb-mf6kg   1/1     Running   0          85m
+		app-prod-java-app-567d84c8cb-p2tln   1/1     Running   0          85m
+		app-prod-java-app-567d84c8cb-q6gs4   1/1     Running   0          85m
+		app-prod-java-app-567d84c8cb-vzkm5   1/1     Running   0          85m
+		app-prod-java-app-567d84c8cb-zlh89   1/1     Running   0          85m
+
+		==> v1/Service
+		NAME                TYPE           CLUSTER-IP      EXTERNAL-IP                                                               PORT(S)          AGE
+		app-prod-java-app   LoadBalancer   10.100.171.18   afe9d3d6f22484020a90279c9176aee8-2045129994.us-west-2.elb.amazonaws.com   8080:31591/TCP   85m
+
+		==> v1/Deployment
+		NAME                READY   UP-TO-DATE   AVAILABLE   AGE
+		app-prod-java-app   9/9     9            9           85m
+		
+		Command 2:
+		==============
+		helm get values app-prod -n prod
+		
+		Output:
+		==========
+		USER-SUPPLIED VALUES:
+		imagePullSecrets:
+		- name: ecr-secret
+		replicaCount: 9
+		service:
+		  nodePort: null
+		  type: LoadBalancer
+
+       Command 3:
+	   ==============
+	   helm get manifest app-prod -n prod
+	   
+	   Output:
+	   ===========
+	   ---
+		# Source: java-app/templates/service.yaml
+		apiVersion: v1
+		kind: Service
+		metadata:
+		  name: app-prod-java-app
+		  labels:
+			helm.sh/chart: java-app-0.1.0
+			app.kubernetes.io/name: java-app
+			app.kubernetes.io/instance: app-prod
+			app.kubernetes.io/version: "1.16.0"
+			app.kubernetes.io/managed-by: Helm
+		spec:
+		  type: LoadBalancer
+		  ports:
+			- port: 8080
+			  targetPort: http
+			  protocol: TCP
+			  name: http
+		  selector:
+			app.kubernetes.io/name: java-app
+			app.kubernetes.io/instance: app-prod
+		---
+		# Source: java-app/templates/deployment.yaml
+		apiVersion: apps/v1
+		kind: Deployment
+		metadata:
+		  name: app-prod-java-app
+		  labels:
+			helm.sh/chart: java-app-0.1.0
+			app.kubernetes.io/name: java-app
+			app.kubernetes.io/instance: app-prod
+			app.kubernetes.io/version: "1.16.0"
+			app.kubernetes.io/managed-by: Helm
+		spec:
+		  replicas: 9
+		  selector:
+			matchLabels:
+			  app.kubernetes.io/name: java-app
+			  app.kubernetes.io/instance: app-prod
+		  template:
+			metadata:
+			  labels:
+				helm.sh/chart: java-app-0.1.0
+				app.kubernetes.io/name: java-app
+				app.kubernetes.io/instance: app-prod
+				app.kubernetes.io/version: "1.16.0"
+				app.kubernetes.io/managed-by: Helm
+			spec:
+			  imagePullSecrets:
+				- name: ecr-secret
+			  containers:
+				- name: java-app
+				  image: "745125233316.dkr.ecr.us-east-1.amazonaws.com/secondapp3:7"
+				  imagePullPolicy: IfNotPresent
+				  ports:
+					- name: http
+					  containerPort: 8080
+					  protocol: TCP
+					  
+	 22)If we wants to rollback failed upgrade automatically will make use --rollback-on-failure
+	    ****** It should be used once pods all are ready ********
+	    Command is: 
+		===============
+		helm upgrade app-prod ./java-app --rollback-on-failure --timeout 5m
+		
+		Output:
+		==========
+		Error: UPGRADE FAILED: "app-prod" has no deployed releases
+		
+		As currently we don't have the failed upgrade we have got the above message.
+
+SESSION 25:
+=====================
+Argo CD:
+=============
+There are few disadvantages with Helm chart which are listed below.
+	1)Anyone can upgrade deloyments so that we dont have any tracker who has done this and that.
+	2)It is hard to secure and hard to audit.
+	3)Cluster drifts to default silently.
+	
+The solution is GitOpx.
+
+So Argo CD is the tool that performs pulling and reconcile the cluster sink with git changes.
+Reconcile is nothing but making equal cluster values with git values.
+
+In simple terminology To change in cluster change it in Git.
+
+Why we needs to use Argo CD?
+	1)Deploy by git push - Merge to main and the app updates
+	2)Drift detection - Shows OutOfSync when the cluster is different from Git.
+	3)Self-heal - Manual changes in the cluster are put back automatically
+	4)Easy Rollback - Git revert back on commit or roll back on older version in the UI
+	5)Visual Web UI - Every app, pod and its health status on one screen
+	6)Helm, Kustomize, YAML - Works directly with helm charts we already built.
+	
+SESSION 26:
+==================
+
+
+
+		
+	
+
+		
+
+		
+		
+	
+	
+
 
 
 
